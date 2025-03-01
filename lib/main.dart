@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,14 +18,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Career Pulse', style: TextStyle(color: Colors.black)),
-        ),
-
+        // appBar: AppBar(
+        //   title: Text('Career Pulse', style: TextStyle(color: Colors.black)),
+        // ),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               // crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
                       SizedBox(height: 50),
                       Text(
                         'Login Here',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
@@ -93,6 +94,14 @@ class _MyAppState extends State<MyApp> {
                             "Log In",
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "Create new account",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 3, 64, 170),
+                          fontSize: 16,
                         ),
                       ),
                     ],
