@@ -159,7 +159,7 @@ class _SignPageState extends State<SignPage> {
                             Navigator.pushNamed(context, '/login');
                           },
                           child: Text(
-                            "Create new account",
+                            "Already have an account?",
                             style: TextStyle(
                               color: Color.fromARGB(255, 3, 64, 170),
                               fontSize: 16,
