@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "692201536836",
+    "project_id": "career-pulse-1dd22",
+    "storage_bucket": "career-pulse-1dd22.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692201536836:android:9b22d8deb29f02f6902b11",
+        "android_client_info": {
+          "package_name": "com.example.career_pulse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692201536836-i36i8tulqnmqvc0844nvi5bfkvjqo9oc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.career_pulse",
+            "certificate_hash": "e38c3cbe493d782e207e7d06535878f3605cd14b"
+          }
+        },
+        {
+          "client_id": "692201536836-hs7brsv2nbv7t8as82s17kl6v2kl7jn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFrGKPB_doYJhLyGMz6b9L-aECi1oc8rI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692201536836-hs7brsv2nbv7t8as82s17kl6v2kl7jn1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "692201536836-cja1ol9thftcttjomj8b8l98fng0i9s9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.careerPulse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

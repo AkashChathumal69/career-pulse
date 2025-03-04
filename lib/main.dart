@@ -1,9 +1,16 @@
+import 'package:career_pulse/firebase_options.dart';
 import 'package:career_pulse/pages/signup.dart';
 import 'package:career_pulse/pages/login.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options:
+        DefaultFirebaseOptions.currentPlatform, // Only if using FlutterFire CLI
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -58,7 +65,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/signup');
+                        Navigator.pushNamed(context, '/login');
                       },
                       child: const Text(
                         "Get Started",
