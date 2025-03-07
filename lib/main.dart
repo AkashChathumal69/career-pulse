@@ -1,6 +1,7 @@
 import 'package:career_pulse/firebase_options.dart';
 import 'package:career_pulse/pages/signup.dart';
 import 'package:career_pulse/pages/login.dart';
+import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: AuthGate(),
       routes: {
         '/signup': (context) => const SignPage(),
         '/login': (context) => const LoginPage(),
