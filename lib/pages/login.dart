@@ -60,11 +60,16 @@ class _LoginPageState extends State<LoginPage> {
               // mainAxisAlignment: MainAxisAlignment.center,
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                //logo
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: 50),
+
+                      //Logo
+                      Image.asset('assets/logo.png', height: 100),
+                      SizedBox(height: 20),
 
                       // Topic
                       Text(
