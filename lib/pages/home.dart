@@ -1,3 +1,4 @@
+import 'package:career_pulse/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class Dashboad extends StatelessWidget {
@@ -47,6 +48,32 @@ class Dashboad extends StatelessWidget {
                     child: Icon(Icons.notifications, color: Colors.white),
                   ),
                 ],
+              ),
+
+              //sign out button
+              SizedBox(height: 20),
+              Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.blue[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: TextButton(
+                    onPressed: () {
+                      AuthService().signOut();
+                    },
+                    child: Text(
+                      "Sign Out",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
               //search bar
@@ -133,6 +160,7 @@ class Dashboad extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(width: 20),
                     //category 3
                     Container(
                       height: 130,

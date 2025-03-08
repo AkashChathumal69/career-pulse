@@ -1,9 +1,11 @@
 import 'package:career_pulse/firebase_options.dart';
+import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/signup.dart';
 import 'package:career_pulse/pages/login.dart';
 import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,15 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthGate(),
-      routes: {
-        '/signup': (context) => const SignPage(),
-        '/login': (context) => const LoginPage(),
-        '/home': (context) => const HomePage(),
-      },
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: AuthGate());
   }
 }
 
@@ -37,6 +31,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: GNav(
+        haptic: true,
+        tabs: [
+          GButton(icon: Icons.home, text: 'Home'),
+          GButton(icon: Icons.search, text: 'Search'),
+          GButton(icon: Icons.person, text: 'Profile'),
+        ],
+      ),
       body: Stack(
         children: [
           // Background image
@@ -67,7 +69,10 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/login');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AuthGate()),
+                        );
                       },
                       child: const Text(
                         "Get Started",
