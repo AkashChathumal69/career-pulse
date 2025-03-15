@@ -41,9 +41,11 @@ class _MainScreenState extends State<MainScreen> {
         onTabChange: (index) {
           if (index == 1 && FirebaseAuth.instance.currentUser == null) {
             // If user selects Profile but is not logged in, redirect to login
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
+              MaterialPageRoute(
+                builder: (context) => MainScreen(),
+              ), // Navigate to main screen
             );
           } else {
             setState(() {
@@ -63,8 +65,9 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
-      Dashboad(), // Replace with actual Search Page
+      Dashboad(),
       ProfilePage(),
+      // Replace with actual Search Page
     ][index];
   }
 }
