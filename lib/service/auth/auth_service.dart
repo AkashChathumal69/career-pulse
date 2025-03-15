@@ -1,5 +1,7 @@
+
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/login.dart';
+
 import 'package:career_pulse/service/firestore/handle_user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,10 @@ class AuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final UserDataHanndeler _userDataHanndeler = UserDataHanndeler();
 
+
   Future<void> loginWithGmail(BuildContext context) async {
+
+
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
@@ -35,11 +40,13 @@ class AuthService {
 
       if (user != null) {
         await _userDataHanndeler.handleUserData(user);
+
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => Dashboad()),
           (route) => false, // Remove all previous routes
         );
+
       } else {}
     } catch (e) {
       print(e.toString());

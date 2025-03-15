@@ -26,7 +26,9 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _handleGoogleSignIn() async {
     setState(() {
       _isLoading = true;
+
       _authService.loginWithGmail(context);
+
     });
 
     try {
