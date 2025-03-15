@@ -139,7 +139,7 @@ class _SignPageState extends State<SignPage> {
                               Navigator.pushNamed(context, "/login");
                             },
                             child: const Text(
-                              "Log In",
+                              "Register",
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
@@ -174,7 +174,7 @@ class _SignPageState extends State<SignPage> {
                               ),
                             ),
 
-                            Text("or log in with"),
+                            Text("or sign up with"),
                             Expanded(
                               child: Divider(
                                 color: Colors.grey[400],
