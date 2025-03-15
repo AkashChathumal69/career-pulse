@@ -1,24 +1,24 @@
-import 'package:career_pulse/pages/home.dart';
-import 'package:career_pulse/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:career_pulse/pages/login.dart';
 
-class AuthGate extends StatelessWidget {
-  const AuthGate({super.key});
+class AuthGuard extends StatelessWidget {
+  final Widget child;
+
+  const AuthGuard({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const Dashboad();
-          } else {
-            return const LoginPage();
-          }
-        },
-      ),
-    );
+    if (FirebaseAuth.instance.currentUser == null) {
+      // Redirect to Login if not authenticated
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginPage()),
+        );
+      });
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    return child; // Show the actual page if authenticated
   }
 }

@@ -62,7 +62,7 @@ class Dashboad extends StatelessWidget {
                 child: Center(
                   child: TextButton(
                     onPressed: () {
-                      AuthService().signOut();
+                      AuthService().signOut(context);
                     },
                     child: Text(
                       "Sign Out",
