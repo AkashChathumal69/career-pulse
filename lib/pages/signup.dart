@@ -2,10 +2,6 @@ import 'package:career_pulse/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(SignPage());
-}
-
 class SignPage extends StatefulWidget {
   const SignPage({super.key});
 
