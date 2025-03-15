@@ -2,6 +2,7 @@ import 'package:career_pulse/main.dart';
 import 'package:career_pulse/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(LoginPage());
@@ -15,17 +16,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _authservice = AuthService();
+  User? user = FirebaseAuth.instance.currentUser;
+
+  final AuthService _authService = AuthService();
+
   bool _isLoading = false;
 
   Future<void> _handleGoogleSignIn() async {
     setState(() {
       _isLoading = true;
+      _authService.loginWithGmail();
     });
 
     try {
-      final userCredential = await _authservice.loginWithGmail();
-      if (userCredential != null) {
+      if (user != null) {
         // Navigate to the home page
         Navigator.pushReplacement(
           context,
