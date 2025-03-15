@@ -1,4 +1,5 @@
 import 'package:career_pulse/main.dart';
+import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _handleGoogleSignIn() async {
     setState(() {
       _isLoading = true;
-      _authService.loginWithGmail();
+      _authService.loginWithGmail(context);
     });
 
     try {
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         // Navigate to the home page
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => Dashboad()),
         );
       }
     } catch (e) {
