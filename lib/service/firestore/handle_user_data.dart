@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class UserDataHanndeler {
+class UserDataHandler {
   Future<void> handleUserData(User user) async {
     if (user != null) {
       DocumentReference userRef = FirebaseFirestore.instance
