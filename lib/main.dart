@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(debugShowCheckedModeBanner: false, home: MainScreen());
-
   }
 }
 
@@ -68,6 +66,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget _getPage(int index) {
     return [
       Dashboad(),
+      SignPage(),
       ProfilePage(),
       // Replace with actual Search Page
     ][index];
