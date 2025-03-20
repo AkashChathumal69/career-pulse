@@ -9,12 +9,12 @@ class Dashboad extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blue[800],
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Column(
-            children: [
-              //top row
-              Row(
+        child: Column(
+          children: [
+            //top row
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // hi Akash
@@ -49,35 +49,38 @@ class Dashboad extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
 
-              //sign out button
-              SizedBox(height: 20),
-              Container(
-                height: 50,
-                width: 200,
-                decoration: BoxDecoration(
-                  color: Colors.blue[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: TextButton(
-                    onPressed: () {
-                      AuthService().signOut(context);
-                    },
-                    child: Text(
-                      "Sign Out",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            //sign out button
+            SizedBox(height: 20),
+            // Container(
+            //   height: 50,
+            //   width: 200,
+            //   decoration: BoxDecoration(
+            //     color: Colors.blue[300],
+            //     borderRadius: BorderRadius.circular(10),
+            //   ),
+            //   child: Center(
+            //     child: TextButton(
+            //       onPressed: () {
+            //         AuthService().signOut(context);
+            //       },
+            //       child: Text(
+            //         "Sign Out",
+            //         style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 16,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
 
-              //search bar
-              Container(
+            //search bar
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: Container(
                 margin: EdgeInsets.only(top: 20),
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 height: 50,
@@ -101,9 +104,12 @@ class Dashboad extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
-              //Categories topic
-              Row(
+            ),
+            SizedBox(height: 20),
+            //Categories topic
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -119,9 +125,12 @@ class Dashboad extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              //Categories list
-              SingleChildScrollView(
+            ),
+            SizedBox(height: 20),
+            //Categories list
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 0, 2),
+              child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
@@ -180,8 +189,45 @@ class Dashboad extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                child: Container(
+                  height: 00,
+                  width: 700,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          color: const Color.fromARGB(255, 207, 0, 0),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          height: 100,
+                          color: const Color.fromARGB(255, 0, 224, 19),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          height: 100,
+                          color: const Color.fromARGB(255, 244, 236, 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -75,7 +75,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainScreen(),
+                      builder: (context) => Dashboad(),
                     ), // Navigate to main screen
                   );
                 } else {
