@@ -20,7 +20,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: MainScreen());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // theme: ThemeData(fontFamily: 'Poppins'),
+      home: MainScreen(),
+    );
   }
 }
 
@@ -47,7 +51,12 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _getPage(_selectedIndex), // Call _getPage method
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Color.fromARGB(
+          255,
+          0,
+          35,
+          114,
+        ), /////////////////////////////////////////////
         child: Padding(
           padding: const EdgeInsets.all(8.0),
 
@@ -62,11 +71,11 @@ class _MainScreenState extends State<MainScreen> {
               rippleColor: Colors.grey[300] ?? Colors.grey,
               hoverColor: Colors.grey[100] ?? Colors.grey,
               gap: 8,
-              activeColor: Colors.blueAccent,
+              activeColor: Colors.white,
               iconSize: 30,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              tabActiveBorder: Border.all(color: Colors.blueAccent),
-              color: Colors.black,
+              tabActiveBorder: Border.all(color: Colors.white),
+              color: Colors.grey,
 
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
@@ -88,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
               tabs: [
                 GButton(icon: Icons.home, text: 'Home'),
                 GButton(icon: Icons.category, text: 'Categories'),
-                GButton(icon: Icons.search, text: 'Search'),
+                GButton(icon: Icons.message, text: 'Chats'),
                 GButton(icon: Icons.person, text: 'Profile'),
               ],
             ),
