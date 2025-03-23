@@ -35,6 +35,21 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Career Pulse'),
+        actions: [
+          if (FirebaseAuth.instance.currentUser != null)
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+            ),
+        ],
+      ),
       body: _getPage(_selectedIndex), // Call _getPage method
       bottomNavigationBar: GNav(
         selectedIndex: _selectedIndex,
