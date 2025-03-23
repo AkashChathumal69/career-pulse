@@ -1,5 +1,4 @@
 import 'package:career_pulse/firebase_options.dart';
-import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/signup.dart';
@@ -24,7 +23,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       home: WorkerProfile(),
+
+      // theme: ThemeData(fontFamily: 'Poppins'),
+
     );
   }
 }
@@ -50,9 +53,29 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Career Pulse'),
+        actions: [
+          if (FirebaseAuth.instance.currentUser != null)
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+            ),
+        ],
+      ),
       body: _getPage(_selectedIndex), // Call _getPage method
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Color.fromARGB(
+          255,
+          0,
+          35,
+          114,
+        ), /////////////////////////////////////////////
         child: Padding(
           padding: const EdgeInsets.all(8.0),
 
@@ -67,11 +90,11 @@ class _MainScreenState extends State<MainScreen> {
               rippleColor: Colors.grey[300] ?? Colors.grey,
               hoverColor: Colors.grey[100] ?? Colors.grey,
               gap: 8,
-              activeColor: Colors.blueAccent,
+              activeColor: Colors.white,
               iconSize: 30,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              tabActiveBorder: Border.all(color: Colors.blueAccent),
-              color: Colors.black,
+              tabActiveBorder: Border.all(color: Colors.white),
+              color: Colors.grey,
 
               selectedIndex: _selectedIndex,
               onTabChange: (index) {
@@ -80,7 +103,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MainScreen(),
+                      builder: (context) => Dashboad(),
                     ), // Navigate to main screen
                   );
                 } else {
@@ -93,7 +116,7 @@ class _MainScreenState extends State<MainScreen> {
               tabs: [
                 GButton(icon: Icons.home, text: 'Home'),
                 GButton(icon: Icons.category, text: 'Categories'),
-                GButton(icon: Icons.search, text: 'Search'),
+                GButton(icon: Icons.message, text: 'Chats'),
                 GButton(icon: Icons.person, text: 'Profile'),
               ],
             ),

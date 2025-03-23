@@ -1,4 +1,7 @@
+import 'package:career_pulse/model/user_model.dart';
 import 'package:career_pulse/service/auth/auth_gate.dart';
+import 'package:career_pulse/service/firestore/handle_user_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -9,6 +12,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  UserDataHandler _userDataHandler = UserDataHandler();
+  User? user = FirebaseAuth.instance.currentUser;
+
   final _formKey = GlobalKey<FormState>();
   final List<String> _occupations = [
     'Student',
@@ -18,7 +24,52 @@ class _ProfilePageState extends State<ProfilePage> {
     'Designer',
     'Other',
   ];
-  String? _selectedOccupation;
+  String? _name;
+  String? _email;
+  String? _phone;
+  String? _address;
+  String? _photoUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _userDataHandler.getUserData(user).then((userData) {
+      if (userData != null) {
+        setState(() {
+          _name = userData['name'];
+          _email = userData['email'];
+          _phone = userData['phone'];
+          _address = userData['address'];
+          _photoUrl = userData['photoUrl'];
+        });
+      }
+    });
+  }
+
+  // Future<void> _fetchUserData() async {
+
+  //   if (user != null) {
+  //     // Assuming you have a method to fetch user data from Firestore or another source
+  //     // For example:
+  //     // DocumentSnapshot userData = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+  //     // setState(() {
+  //     //   _firstName = userData['firstName'];
+  //     //   _lastName = userData['lastName'];
+  //     //   _about = userData['about'];
+  //     //   _phoneNumber = userData['phoneNumber'];
+  //     //   _selectedOccupation = userData['occupation'];
+  //     // });
+
+  //     // For demonstration, we'll use dummy data
+  //     setState(() {
+  //       _firstName = user.displayName;
+  //       _lastName = 'Doe';
+  //       _about = 'About John Doe';
+  //       _phoneNumber = '1234567890';
+  //       _selectedOccupation = 'Engineer';
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Hi! Lakshan',
+                                  'Hi! ${_name ?? ''}',
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: Colors.grey.shade600,
@@ -71,8 +122,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               CircleAvatar(
                                 radius: 40,
                                 backgroundColor: Colors.grey.shade200,
-                                backgroundImage: const NetworkImage(
-                                  'https://placekitten.com/200/200', // Placeholder image
+                                backgroundImage: NetworkImage(
+                                  _photoUrl ??
+                                      'https://via.placeholder.com/150', // Placeholder image
                                 ),
                               ),
                               Positioned(
@@ -101,6 +153,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                     // Form fields
                     TextFormField(
+                      initialValue: _name,
                       decoration: InputDecoration(
                         labelText: 'First name',
                         filled: true,
@@ -110,11 +163,17 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderSide: BorderSide.none,
                         ),
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          _name = value;
+                        });
+                      },
                     ),
 
                     const SizedBox(height: 16),
 
                     TextFormField(
+                      initialValue: _name,
                       decoration: InputDecoration(
                         labelText: 'Last name',
                         filled: true,
@@ -124,11 +183,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderSide: BorderSide.none,
                         ),
                       ),
+                      onChanged: (value) {
+                        _name = value;
+                      },
                     ),
 
                     const SizedBox(height: 16),
 
                     TextFormField(
+                      initialValue: _address,
                       maxLines: 4,
                       decoration: InputDecoration(
                         labelText: 'About',
@@ -139,6 +202,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderSide: BorderSide.none,
                         ),
                       ),
+                      onChanged: (value) {
+                        _address = value;
+                      },
                     ),
 
                     const SizedBox(height: 16),
@@ -154,7 +220,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderSide: BorderSide.none,
                         ),
                       ),
-                      value: _selectedOccupation,
+                      value: _occupations.first,
                       items:
                           _occupations.map((String occupation) {
                             return DropdownMenuItem<String>(
@@ -164,7 +230,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           }).toList(),
                       onChanged: (String? newValue) {
                         setState(() {
-                          _selectedOccupation = newValue;
+                          _address = newValue;
                         });
                       },
                       icon: const Icon(Icons.arrow_drop_down),
@@ -173,6 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(height: 16),
 
                     TextFormField(
+                      initialValue: _phone,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         labelText: 'Phone number',
@@ -183,6 +250,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderSide: BorderSide.none,
                         ),
                       ),
+                      onChanged: (value) {
+                        _phone = value;
+                      },
                     ),
 
                     const SizedBox(height: 32),
