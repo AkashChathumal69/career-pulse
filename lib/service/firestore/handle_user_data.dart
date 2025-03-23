@@ -1,3 +1,4 @@
+import 'package:career_pulse/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -19,9 +20,11 @@ class UserDataHandler {
         // New user: Save profile data
         await userRef.set({
           'uid': user.uid,
-          'name': user.displayName ?? 'New User',
+          'name': user.displayName,
           'email': user.email,
-          'photoUrl': user.photoURL ?? '',
+          'phone': "",
+          'address': "",
+          'photoUrl': user.photoURL,
           'createdAt': FieldValue.serverTimestamp(),
         });
         print("New User Created!");
@@ -29,5 +32,28 @@ class UserDataHandler {
     } else {
       print("No user signed in.");
     }
+  }
+
+  // Fetch user data from Firestore
+
+  Future<Map<String, dynamic>?> getUserData(User? user) async {
+    if (user != null) {
+      DocumentReference userRef = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid);
+
+      DocumentSnapshot userSnapshot = await userRef.get();
+
+      if (userSnapshot.exists) {
+        // Existing user: Fetch profile data
+
+        UserData userData = UserData.fromMap(
+          userSnapshot.data() as Map<String, dynamic>,
+        );
+
+        return userData.toMap();
+      }
+    }
+    return null;
   }
 }

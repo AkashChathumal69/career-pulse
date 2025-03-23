@@ -1,45 +1,41 @@
-class User {
+class UserData {
   String name;
   String email;
-  String password;
   String phone;
   String address;
-  String image;
-  String id;
+  String photoUrl;
+  String uid;
 
-  User({
+  UserData({
     required this.name,
     required this.email,
-    required this.password,
     required this.phone,
     required this.address,
-    required this.image,
-    required this.id,
+    required this.photoUrl,
+    required this.uid,
   });
 
   // Convert model to JSON (for Firestore)
   Map<String, dynamic> toMap() {
     return {
-      'uid': id,
+      'uid': uid,
       'name': name,
       'email': email,
-      'password': password,
       'phone': phone,
       'address': address,
-      'image': image,
+      'photoUrl': photoUrl,
     };
   }
 
   // Convert JSON to model (for Firestore)
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      id: map['uid'],
+  factory UserData.fromMap(Map<String, dynamic> map) {
+    return UserData(
       name: map['name'],
       email: map['email'],
-      password: map['password'],
       phone: map['phone'],
       address: map['address'],
-      image: map['image'],
+      photoUrl: map['photoUrl'],
+      uid: map['uid'],
     );
   }
 }
