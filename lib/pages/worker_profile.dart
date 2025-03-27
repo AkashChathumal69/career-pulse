@@ -14,38 +14,34 @@ class _WorkerProfileState extends State<WorkerProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Center(
-                    child: Container(
-                      height: profileIcon,
-                      width: profileIcon,
-                      decoration: BoxDecoration(
-                        color: Colors.blueAccent,
-                        borderRadius: BorderRadius.circular(profileIcon / 2),
-                        border: Border.all(color: Colors.black, width: 3),
-                      ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Center(
+                  child: Container(
+                    height: profileIcon,
+                    width: profileIcon,
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent,
+                      borderRadius: BorderRadius.circular(profileIcon / 2),
+                      border: Border.all(color: Colors.black, width: 3),
                     ),
                   ),
+                ),
 
-                  Text("John Doe", style: TextStyle(fontSize: 25)),
+                Text("John Doe", style: TextStyle(fontSize: 25)),
 
-                  SizedBox(height: 20),
+                SizedBox(height: 20),
 
-                  BlueContainer(title: "Mobile Number", delayMilliseconds: 200),
-                  SizedBox(height: 10),
+                BlueContainer(title: "Mobile Number", delayMilliseconds: 200),
+                SizedBox(height: 10),
 
-                  BlueContainer(title: "City", delayMilliseconds: 400),
-                ],
-              ),
+                BlueContainer(title: "City", delayMilliseconds: 400),
+              ],
             ),
           ),
         ),
