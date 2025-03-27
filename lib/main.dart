@@ -1,5 +1,6 @@
 import 'package:career_pulse/firebase_options.dart';
 import 'package:career_pulse/pages/category.dart';
+import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/signup.dart';
@@ -9,6 +10,7 @@ import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 void main() async {
@@ -25,9 +27,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
+
       home: CategoryPage(),
 
       // theme: ThemeData(fontFamily: 'Poppins'),
+
+      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
+      home: ProfilePage(),
     );
   }
 }
@@ -103,7 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Dashboad(),
+                      builder: (context) => LoginPage(),
                     ), // Navigate to main screen
                   );
                 } else {
@@ -128,7 +134,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
-      Dashboad(),
+      HomePage(),
       SignPage(),
       ProfilePage(),
       // Replace with actual Search Page
