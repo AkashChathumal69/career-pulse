@@ -1,4 +1,5 @@
 import 'package:career_pulse/firebase_options.dart';
+import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/signup.dart';
@@ -8,6 +9,7 @@ import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 void main() async {
@@ -23,11 +25,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
-      home: WorkerProfile(),
-
-      // theme: ThemeData(fontFamily: 'Poppins'),
-
+      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
+      home: GigCreate(),
     );
   }
 }
