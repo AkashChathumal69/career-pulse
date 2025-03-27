@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
-      home: GigCreate(),
+      home: ProfilePage(),
     );
   }
 }
@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Dashboad(),
+                      builder: (context) => LoginPage(),
                     ), // Navigate to main screen
                   );
                 } else {
@@ -127,7 +127,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
-      Dashboad(),
+      HomePage(),
       SignPage(),
       ProfilePage(),
       // Replace with actual Search Page

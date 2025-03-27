@@ -52,30 +52,29 @@ class Dashboad extends StatelessWidget {
             ),
 
             //sign out button
-
-            // Container(
-            //   height: 50,
-            //   width: 200,
-            //   decoration: BoxDecoration(
-            //     color: Colors.blue[300],
-            //     borderRadius: BorderRadius.circular(10),
-            //   ),
-            //   child: Center(
-            //     child: TextButton(
-            //       onPressed: () {
-            //         AuthService().signOut(context);
-            //       },
-            //       child: Text(
-            //         "Sign Out",
-            //         style: TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 16,
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            Container(
+              height: 50,
+              width: 200,
+              decoration: BoxDecoration(
+                color: Colors.blue[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: TextButton(
+                  onPressed: () {
+                    AuthService().signOut(context);
+                  },
+                  child: Text(
+                    "Sign Out",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
 
             //search bar
             Padding(
