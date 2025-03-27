@@ -1,4 +1,5 @@
 import 'package:career_pulse/firebase_options.dart';
+import 'package:career_pulse/pages/category.dart';
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/signup.dart';
@@ -24,10 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home: WorkerProfile(),
+      home: CategoryPage(),
 
       // theme: ThemeData(fontFamily: 'Poppins'),
-
     );
   }
 }
