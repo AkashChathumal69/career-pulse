@@ -1,4 +1,5 @@
 import 'package:career_pulse/firebase_options.dart';
+import 'package:career_pulse/pages/category.dart';
 import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
@@ -25,6 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
+
+      home: CategoryPage(),
+
+      // theme: ThemeData(fontFamily: 'Poppins'),
+
       theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
       home: ProfilePage(),
     );
