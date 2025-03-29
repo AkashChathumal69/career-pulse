@@ -84,18 +84,46 @@ class CategoryPage extends StatelessWidget {
 
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/cate1.png',
-                            fit: BoxFit.cover,
-                            height: 103,
-                            width: 120,
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                'assets/cate1.png',
+                                fit: BoxFit.cover,
+                                height: 103,
+                                width: 120,
+                              ),
+                            ),
+                          ],
                         ),
+                        Column(
+                          children: [
+                            Text(
+                              "Software Engineer",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 46, 125),
+                              ),
+                            ),
+
+                            SizedBox(height: 5),
+                            Text(
+                              "Software Engineer",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 46, 125),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
                       ],
                     ),
                   ),

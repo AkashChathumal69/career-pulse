@@ -1,5 +1,6 @@
 import 'package:career_pulse/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:career_pulse/main.dart';
 
 class Dashboad extends StatelessWidget {
   const Dashboad({super.key});

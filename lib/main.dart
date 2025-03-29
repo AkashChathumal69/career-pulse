@@ -1,6 +1,5 @@
 import 'package:career_pulse/firebase_options.dart';
 import 'package:career_pulse/pages/category.dart';
-import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/signup.dart';
@@ -10,7 +9,6 @@ import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 void main() async {
@@ -27,13 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-
-      home: CategoryPage(),
+      home: MainScreen(),
 
       // theme: ThemeData(fontFamily: 'Poppins'),
-
-      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
-      home: ProfilePage(),
     );
   }
 }
@@ -49,6 +43,14 @@ class _MainScreenState extends State<MainScreen> {
     fontSize: 30,
     fontWeight: FontWeight.w600,
   );
+
+  static const List<Widget> _pages = <Widget>[
+    Dashboad(), // Home page
+    CategoryPage(), // Replace with your actual category page
+    ProfilePage(), // Replace with your actual profile page
+    SignPage(), // Replace with your actual sign-up or login page
+  ];
+
   static const List<Widget> _widgetOptions = <Widget>[
     Text("Home", style: optionStyle),
     Text("Categories", style: optionStyle),
@@ -60,7 +62,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Career Pulse'),
+        // backgroundColor: Color.fromARGB(255, 0, 46, 125),
         actions: [
           if (FirebaseAuth.instance.currentUser != null)
             IconButton(
@@ -109,7 +111,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LoginPage(),
+                      builder: (context) => Dashboad(),
                     ), // Navigate to main screen
                   );
                 } else {
@@ -134,7 +136,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
-      HomePage(),
+      Dashboad(),
       SignPage(),
       ProfilePage(),
       // Replace with actual Search Page
