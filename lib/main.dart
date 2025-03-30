@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      home: MainScreen(),
+      home: CategoryPage(),
 
       // theme: ThemeData(fontFamily: 'Poppins'),
     );
