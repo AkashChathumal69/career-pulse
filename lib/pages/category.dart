@@ -1,3 +1,4 @@
+import 'package:career_pulse/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:career_pulse/main.dart';
 
@@ -20,7 +21,16 @@ class CategoryPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.arrow_back_ios, color: Colors.white),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Dashboad()),
+                          );
+                        },
+
+                        child: Icon(Icons.arrow_back_ios, color: Colors.white),
+                      ),
                       SizedBox(width: 10),
                       Text(
                         "Category",

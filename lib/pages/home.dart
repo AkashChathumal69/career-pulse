@@ -1,6 +1,9 @@
+import 'package:career_pulse/pages/category.dart';
+import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:career_pulse/main.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Dashboad extends StatelessWidget {
   const Dashboad({super.key});
@@ -146,7 +149,7 @@ class Dashboad extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          "assets/electrcian.jpg",
+                          "assets/mechanic.png",
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -164,7 +167,7 @@ class Dashboad extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          "assets/electrcian.jpg",
+                          "assets/electrician.png",
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -181,7 +184,7 @@ class Dashboad extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          "assets/electrcian.jpg",
+                          "assets/mechanic.png",
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -248,7 +251,14 @@ class Dashboad extends StatelessWidget {
                                       ),
 
                                       ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => GigCreate(),
+                                            ),
+                                          );
+                                        },
                                         child: Text('Apply Now'),
                                       ),
                                     ],
@@ -313,7 +323,15 @@ class Dashboad extends StatelessWidget {
                                       ),
                                       SizedBox(height: 10),
                                       ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => CategoryPage(),
+                                            ),
+                                          );
+                                        },
                                         child: Text('Discover'),
                                       ),
                                     ],
@@ -374,7 +392,12 @@ class Dashboad extends StatelessWidget {
                                   ),
                                   Center(
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Share.share(
+                                          'Check out this amazing app: https://career-pulse.com',
+                                          subject: 'Career Pulse App',
+                                        );
+                                      },
 
                                       child: Text('Invite friends'),
                                     ),

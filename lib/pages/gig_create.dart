@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:career_pulse/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,20 +33,15 @@ class _GigCreateState extends State<GigCreate> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Dashboad()),
+                          );
                         },
-                        child: Container(
-                          padding: EdgeInsets.all(5),
-                          height: 35,
-                          width: 35,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 218, 215, 215),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: const Color.fromARGB(255, 8, 82, 139),
-                          ),
+
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: Color.fromARGB(255, 0, 46, 125),
                         ),
                       ),
                       SizedBox(width: 50),
