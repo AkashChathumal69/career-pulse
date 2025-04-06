@@ -1,10 +1,12 @@
 import 'dart:io';
+
 import 'package:career_pulse/model/gig_model.dart';
 import 'package:career_pulse/service/supabase/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class GigCreate extends StatefulWidget {
@@ -17,6 +19,7 @@ class GigCreate extends StatefulWidget {
 class _GigCreateState extends State<GigCreate> {
   File? _image;
   final picker = ImagePicker();
+
   final bool _isUploading = false;
   String? _uploadedImageUrl;
 
@@ -93,6 +96,7 @@ class _GigCreateState extends State<GigCreate> {
     setState(() {}); // Refresh the UI
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,6 +112,7 @@ class _GigCreateState extends State<GigCreate> {
                     children: [
                       GestureDetector(
                         onTap: () {
+
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -122,6 +127,7 @@ class _GigCreateState extends State<GigCreate> {
                             Icons.arrow_back,
                             color: const Color.fromARGB(255, 8, 82, 139),
                           ),
+
                         ),
                       ),
                       SizedBox(width: 50),
@@ -139,7 +145,9 @@ class _GigCreateState extends State<GigCreate> {
                 SizedBox(height: 40),
 
                 TextField(
+
                   controller: _jobTitleController,
+
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -179,30 +187,38 @@ class _GigCreateState extends State<GigCreate> {
                             ),
                           )
                           .toList(),
+
                   onChanged: (value) {
                     setState(() {
                       _selectedCategory = value;
                     });
                   },
+
                   hint: Text("Electrician"),
                 ),
                 SizedBox(height: 10),
                 TextField(
+
                   controller: _descriptionController,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
+
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.blueAccent),
                     ),
+
                     hintText: "Job Description",
+
                   ),
                 ),
                 SizedBox(height: 10),
                 // Image Upload Box
                 GestureDetector(
+
                   onTap: _pickImage,
+
                   child: Container(
                     width: double.infinity,
                     height: 150,
@@ -251,6 +267,7 @@ class _GigCreateState extends State<GigCreate> {
                   ),
                 ),
 
+
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submitGig,
@@ -266,6 +283,7 @@ class _GigCreateState extends State<GigCreate> {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
+
               ],
             ),
           ),

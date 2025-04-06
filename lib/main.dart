@@ -1,7 +1,9 @@
 import 'package:career_pulse/firebase_options.dart';
+
 import 'package:career_pulse/pages/ImageUploadtest.dart';
 import 'package:career_pulse/pages/category.dart';
 import 'package:career_pulse/pages/gig_create.dart';
+
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/signup.dart';

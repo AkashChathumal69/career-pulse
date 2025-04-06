@@ -1,4 +1,8 @@
+
+import 'package:career_pulse/pages/home.dart';
 import 'package:flutter/material.dart';
+import 'package:career_pulse/main.dart';
+
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -19,7 +23,18 @@ class CategoryPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.arrow_back_ios, color: Colors.white),
+
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Dashboad()),
+                          );
+                        },
+
+                        child: Icon(Icons.arrow_back_ios, color: Colors.white),
+                      ),
+
                       SizedBox(width: 10),
                       Text(
                         "Category",
@@ -51,18 +66,57 @@ class CategoryPage extends StatelessWidget {
                   child: Container(
                     child: Row(
                       children: [
-                        Icon(Icons.location_on, color: Colors.white),
-                        Text(
-                          "Location",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
+
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 0, 35, 114),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          height: 40,
+                          width: 100,
+                          child: Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment.center, // Center horizontally
+                            crossAxisAlignment:
+                                CrossAxisAlignment.center, // Center vertically
+                            children: [
+                              Icon(Icons.location_on, color: Colors.white),
+                              SizedBox(width: 5), // Space between Icon and Text
+                              Text(
+                                "Location",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
 
                         SizedBox(width: 40),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 0, 35, 114),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          height: 40,
+                          width: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.list, color: Colors.white),
+                              SizedBox(width: 5),
+                              Text(
+                                "Category",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
 
-                        Icon(Icons.list, color: Colors.white),
-                        Text(
-                          "Categories",
-                          style: TextStyle(fontSize: 15, color: Colors.white),
                         ),
                       ],
                     ),
@@ -100,25 +154,57 @@ class CategoryPage extends StatelessWidget {
                             ),
                           ],
                         ),
+
+                        SizedBox(width: 10),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Row(
+                              children: [
+                                Icon(Icons.star, color: Colors.yellow),
+                                Text('4.5', style: TextStyle(fontSize: 15)),
+                                SizedBox(width: 80),
+                                Icon(Icons.favorite, color: Colors.red),
+                              ],
+                            ),
+                            SizedBox(height: 10),
+
                             Text(
-                              "Software Engineer",
+                              "Electrician",
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 15,
+
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 46, 125),
                               ),
                             ),
 
-                            SizedBox(height: 5),
-                            Text(
-                              "Software Engineer",
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 0, 46, 125),
-                              ),
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person,
+                                  color: Colors.blue,
+                                  size: 12,
+                                ),
+                                Text(
+                                  "Virat Kholi",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.blue,
+                                  size: 12,
+                                ),
+                                Text(
+                                  "Homagama",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -128,6 +214,98 @@ class CategoryPage extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+
+              //box 2
+              Center(
+                child: Container(
+                  height: 120,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                'assets/cate1.png',
+                                fit: BoxFit.cover,
+                                height: 103,
+                                width: 120,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.star, color: Colors.yellow),
+                                Text('4.5', style: TextStyle(fontSize: 15)),
+                                SizedBox(width: 80),
+                                Icon(Icons.favorite, color: Colors.red),
+                              ],
+                            ),
+                            SizedBox(height: 10),
+
+                            Text(
+                              "Electrician",
+                              style: TextStyle(
+                                fontSize: 15,
+
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 0, 46, 125),
+                              ),
+                            ),
+
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person,
+                                  color: Colors.blue,
+                                  size: 12,
+                                ),
+                                Text(
+                                  "Virat Kholi",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.blue,
+                                  size: 12,
+                                ),
+                                Text(
+                                  "Homagama",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            ),
+
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
               // SizedBox(height: 10),
 
               // Center(
@@ -167,6 +345,7 @@ class CategoryPage extends StatelessWidget {
               //     ),
               //   ),
               // ),
+
             ],
           ),
         ),
