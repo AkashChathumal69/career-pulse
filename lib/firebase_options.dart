@@ -63,8 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '692201536836',
     projectId: 'career-pulse-1dd22',
     storageBucket: 'career-pulse-1dd22.firebasestorage.app',
-    androidClientId: '692201536836-i36i8tulqnmqvc0844nvi5bfkvjqo9oc.apps.googleusercontent.com',
-    iosClientId: '692201536836-cja1ol9thftcttjomj8b8l98fng0i9s9.apps.googleusercontent.com',
+    androidClientId:
+        '692201536836-i36i8tulqnmqvc0844nvi5bfkvjqo9oc.apps.googleusercontent.com',
+    iosClientId:
+        '692201536836-cja1ol9thftcttjomj8b8l98fng0i9s9.apps.googleusercontent.com',
     iosBundleId: 'com.example.careerPulse',
   );
 
@@ -74,8 +76,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '692201536836',
     projectId: 'career-pulse-1dd22',
     storageBucket: 'career-pulse-1dd22.firebasestorage.app',
-    androidClientId: '692201536836-i36i8tulqnmqvc0844nvi5bfkvjqo9oc.apps.googleusercontent.com',
-    iosClientId: '692201536836-cja1ol9thftcttjomj8b8l98fng0i9s9.apps.googleusercontent.com',
+    androidClientId:
+        '692201536836-i36i8tulqnmqvc0844nvi5bfkvjqo9oc.apps.googleusercontent.com',
+    iosClientId:
+        '692201536836-cja1ol9thftcttjomj8b8l98fng0i9s9.apps.googleusercontent.com',
     iosBundleId: 'com.example.careerPulse',
   );
 

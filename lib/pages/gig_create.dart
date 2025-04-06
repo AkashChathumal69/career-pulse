@@ -1,8 +1,12 @@
 import 'dart:io';
 
-import 'package:career_pulse/pages/home.dart';
+import 'package:career_pulse/model/gig_model.dart';
+import 'package:career_pulse/service/supabase/storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class GigCreate extends StatefulWidget {
@@ -15,8 +19,83 @@ class GigCreate extends StatefulWidget {
 class _GigCreateState extends State<GigCreate> {
   File? _image;
   final picker = ImagePicker();
-  //final bool _isUploading = false;
-  //String? _downloadUrl;
+
+  final bool _isUploading = false;
+  String? _uploadedImageUrl;
+
+  final TextEditingController _jobTitleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _keywordsController = TextEditingController();
+  String? _selectedCategory;
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _image = File(image.path);
+        _uploadedImageUrl = null;
+      });
+    }
+  }
+
+  Future<void> _submitGig() async {
+    if (_jobTitleController.text.isEmpty ||
+        _descriptionController.text.isEmpty ||
+        _selectedCategory == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please fill in all fields')));
+      return;
+    }
+
+    if (_image == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please upload an image')));
+      return;
+    }
+
+    //upload Gig image to Supabase Storage
+
+    Storage storage = Storage();
+
+    _uploadedImageUrl = await storage.upload_image(_image!, "gig");
+
+    //Create Gigmodel object
+
+    final gigModel = GigModel(
+      gig_title: _jobTitleController.text,
+      occupation: _selectedCategory!,
+      description: _descriptionController.text,
+      imageUrl: _uploadedImageUrl ?? '', // Use the uploaded image URL
+      uid: FirebaseAuth.instance.currentUser!.uid,
+    );
+
+    //create gig in Firestore
+    final gigRef =
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('gig')
+            .doc();
+
+    await gigRef.set(gigModel.toMap());
+    // Show success message after gig creation
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Gig created successfully')));
+
+    // Clear the form fields after submission
+    _jobTitleController.clear();
+    _descriptionController.clear();
+    _selectedCategory = null;
+    _image = null;
+    _uploadedImageUrl = null;
+    setState(() {}); // Refresh the UI
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +112,22 @@ class _GigCreateState extends State<GigCreate> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Dashboad()),
-                          );
-                        },
 
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Color.fromARGB(255, 0, 46, 125),
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 218, 215, 215),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: const Color.fromARGB(255, 8, 82, 139),
+                          ),
+
                         ),
                       ),
                       SizedBox(width: 50),
@@ -59,6 +145,9 @@ class _GigCreateState extends State<GigCreate> {
                 SizedBox(height: 40),
 
                 TextField(
+
+                  controller: _jobTitleController,
+
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -98,23 +187,38 @@ class _GigCreateState extends State<GigCreate> {
                             ),
                           )
                           .toList(),
-                  onChanged: (value) {},
+
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedCategory = value;
+                    });
+                  },
+
                   hint: Text("Electrician"),
                 ),
                 SizedBox(height: 10),
                 TextField(
+
+                  controller: _descriptionController,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.blueAccent),
                     ),
-                    hintText: "Area",
+
+                    hintText: "Job Description",
+
                   ),
                 ),
                 SizedBox(height: 10),
                 // Image Upload Box
                 GestureDetector(
-                  //onTap: _pickImage,
+
+                  onTap: _pickImage,
+
                   child: Container(
                     width: double.infinity,
                     height: 150,
@@ -162,6 +266,24 @@ class _GigCreateState extends State<GigCreate> {
                     hintText: "Keywords",
                   ),
                 ),
+
+
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _submitGig,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.indigo,
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+
               ],
             ),
           ),

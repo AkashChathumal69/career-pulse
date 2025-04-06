@@ -1,6 +1,8 @@
 import 'package:career_pulse/pages/Reusable%20Widgets/blue_container.dart';
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+
 
 class WorkerProfile extends StatefulWidget {
   const WorkerProfile({super.key});
