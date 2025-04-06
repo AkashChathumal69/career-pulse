@@ -27,7 +27,6 @@ class UserData {
     };
   }
 
-  // Convert JSON to model (for Firestore)
   factory UserData.fromMap(Map<String, dynamic> map) {
     return UserData(
       name: map['name'],

@@ -5,14 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  UserDataHandler _userDataHandler = UserDataHandler();
+  final UserDataHandler _userDataHandler = UserDataHandler();
   User? user = FirebaseAuth.instance.currentUser;
 
   final _formKey = GlobalKey<FormState>();
