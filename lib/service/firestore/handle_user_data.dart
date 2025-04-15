@@ -23,6 +23,8 @@ class UserDataHandler {
         'email': user.email,
         'phone': "",
         'address': "",
+        'location': "",
+        'occupation': null,
         'photoUrl': user.photoURL,
         'createdAt': FieldValue.serverTimestamp(),
       });
@@ -32,7 +34,7 @@ class UserDataHandler {
 
   // Fetch user data from Firestore
 
-  Future<Map<String, dynamic>?> getUserData(User? user) async {
+  Future<UserData?> getUserData(User? user) async {
     if (user != null) {
       DocumentReference userRef = FirebaseFirestore.instance
           .collection('users')
@@ -47,9 +49,25 @@ class UserDataHandler {
           userSnapshot.data() as Map<String, dynamic>,
         );
 
-        return userData.toMap();
+        return userData;
       }
     }
     return null;
   }
+
+
+  // Update user data in Firestore
+  Future<void> updateUserData(User user, Map<String, dynamic> data) async {
+    DocumentReference userRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid);
+
+    await userRef.update(data);
+  }
+
+
+
+
+
+
 }

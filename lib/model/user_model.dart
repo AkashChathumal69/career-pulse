@@ -5,6 +5,9 @@ class UserData {
   String address;
   String photoUrl;
   String uid;
+  String? occupation;
+  String location;
+
 
   UserData({
     required this.name,
@@ -12,6 +15,8 @@ class UserData {
     required this.phone,
     required this.address,
     required this.photoUrl,
+    required this.occupation,
+    required this.location,
     required this.uid,
   });
 
@@ -24,6 +29,8 @@ class UserData {
       'phone': phone,
       'address': address,
       'photoUrl': photoUrl,
+      'occupation': occupation,
+      'location': location,
     };
   }
 
@@ -34,6 +41,8 @@ class UserData {
       phone: map['phone'],
       address: map['address'],
       photoUrl: map['photoUrl'],
+      occupation: map['occupation'],
+      location: map['location'],
       uid: map['uid'],
     );
   }
