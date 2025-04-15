@@ -148,6 +148,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
+      WorkerProfile(),
       GigCreate(),
       ImageUploadScreen(),
       Dashboad(),
