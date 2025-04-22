@@ -2,7 +2,10 @@ import 'package:career_pulse/firebase_options.dart';
 
 import 'package:career_pulse/pages/ImageUploadtest.dart';
 import 'package:career_pulse/pages/category.dart';
+import 'package:career_pulse/pages/chat_page.dart';
+import 'package:career_pulse/pages/chat_user_page.dart';
 import 'package:career_pulse/pages/gig_create.dart';
+import 'package:career_pulse/pages/gig_page.dart';
 
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
@@ -148,14 +151,23 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
+      GigPage(
+        description: "cvbcvbcvbcbcvcv",
+        gigTitle: "cbxcbxcbcbcvb",
+        imageUrl:
+            "https://pfavuxcsstgcpjmvxyyp.supabase.co/storage/v1/object/public/gigimages/1745127370826_1000000035.jpg",
+        keywords: ["bdfgfdgdfg", "dfgdfgdfg", "gdfgdfgfdg", "fdgdfgdfgfdg"],
+        occupation: "Mechanic",
+        uid: "hVPZ7b2WDTeEwnfTscHWfiFqcSz2",
+      ),
       Dashboad(),
+      ChatUserPage(), // Replace with actual Chat Page
+      
       ProfilePage(),
       WorkerProfile(),
       GigCreate(),
       ImageUploadScreen(),
-     
       SignPage(),
-     
       // Replace with actual Search Page
     ][index];
   }

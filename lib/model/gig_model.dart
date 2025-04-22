@@ -4,6 +4,7 @@ class GigModel {
   String description;
   String imageUrl;
   String uid;
+  List<String> keywords;
 
   GigModel({
     required this.gig_title,
@@ -11,6 +12,7 @@ class GigModel {
     required this.description,
     required this.imageUrl,
     required this.uid,
+    required this.keywords,
   });
 
   // Convert model to JSON (for Firestore)
@@ -21,6 +23,7 @@ class GigModel {
       'occupation': occupation,
       'description': description,
       'imageUrl': imageUrl,
+      'keywords': keywords,
     };
   }
 
@@ -32,6 +35,7 @@ class GigModel {
       description: map['description'],
       imageUrl: map['imageUrl'],
       uid: map['uid'],
+      keywords: List<String>.from(map['keywords'] ?? []),
     );
   }
 }
