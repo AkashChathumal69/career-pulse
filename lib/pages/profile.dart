@@ -50,7 +50,9 @@ class _ProfilePageState extends State<ProfilePage> {
     if (user == null) return;
 
     final userData = await _userDataHandler.getUserData(user);
+    if (!mounted) return;
     if (userData != null) {
+      
       setState(() {
         _nameController.text = userData.name;
         _emailController.text = userData.email;
