@@ -1,6 +1,8 @@
+
 import 'package:career_pulse/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:career_pulse/main.dart';
+
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -21,6 +23,7 @@ class CategoryPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -31,6 +34,7 @@ class CategoryPage extends StatelessWidget {
 
                         child: Icon(Icons.arrow_back_ios, color: Colors.white),
                       ),
+
                       SizedBox(width: 10),
                       Text(
                         "Category",
@@ -62,6 +66,7 @@ class CategoryPage extends StatelessWidget {
                   child: Container(
                     child: Row(
                       children: [
+
                         Container(
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 0, 35, 114),
@@ -111,6 +116,7 @@ class CategoryPage extends StatelessWidget {
                               ),
                             ],
                           ),
+
                         ),
                       ],
                     ),
@@ -148,6 +154,7 @@ class CategoryPage extends StatelessWidget {
                             ),
                           ],
                         ),
+
                         SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,10 +173,12 @@ class CategoryPage extends StatelessWidget {
                               "Electrician",
                               style: TextStyle(
                                 fontSize: 15,
+
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 46, 125),
                               ),
                             ),
+
                             SizedBox(height: 10),
                             Row(
                               children: [
@@ -254,10 +263,12 @@ class CategoryPage extends StatelessWidget {
                               "Electrician",
                               style: TextStyle(
                                 fontSize: 15,
+
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 0, 46, 125),
                               ),
                             ),
+
                             SizedBox(height: 10),
                             Row(
                               children: [
@@ -285,6 +296,7 @@ class CategoryPage extends StatelessWidget {
                                 ),
                               ],
                             ),
+
                           ],
                         ),
                         SizedBox(height: 5),
@@ -293,6 +305,47 @@ class CategoryPage extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // SizedBox(height: 10),
+
+              // Center(
+              //   child: Container(
+              //     height: 120,
+              //     width: 350,
+              //     decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(20),
+              //     ),
+
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 10),
+              // Center(
+              //   child: Container(
+              //     height: 120,
+              //     width: 350,
+              //     decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(20),
+              //     ),
+
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
             ],
           ),
         ),

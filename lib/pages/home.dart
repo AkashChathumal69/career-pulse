@@ -251,6 +251,7 @@ class Dashboad extends StatelessWidget {
                                       ),
 
                                       ElevatedButton(
+
                                         onPressed: () {
                                           Navigator.push(
                                             context,
@@ -259,6 +260,7 @@ class Dashboad extends StatelessWidget {
                                             ),
                                           );
                                         },
+
                                         child: Text('Apply Now'),
                                       ),
                                     ],
@@ -323,6 +325,7 @@ class Dashboad extends StatelessWidget {
                                       ),
                                       SizedBox(height: 10),
                                       ElevatedButton(
+
                                         onPressed: () {
                                           Navigator.push(
                                             context,
@@ -332,6 +335,7 @@ class Dashboad extends StatelessWidget {
                                             ),
                                           );
                                         },
+
                                         child: Text('Discover'),
                                       ),
                                     ],
@@ -392,12 +396,14 @@ class Dashboad extends StatelessWidget {
                                   ),
                                   Center(
                                     child: ElevatedButton(
+
                                       onPressed: () {
                                         Share.share(
                                           'Check out this amazing app: https://career-pulse.com',
                                           subject: 'Career Pulse App',
                                         );
                                       },
+
 
                                       child: Text('Invite friends'),
                                     ),

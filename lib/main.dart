@@ -1,5 +1,9 @@
 import 'package:career_pulse/firebase_options.dart';
+
+import 'package:career_pulse/pages/ImageUploadtest.dart';
 import 'package:career_pulse/pages/category.dart';
+import 'package:career_pulse/pages/gig_create.dart';
+
 import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/signup.dart';
@@ -10,10 +14,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Supabase.initialize(
+    url: 'https://pfavuxcsstgcpjmvxyyp.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmYXZ1eGNzc3RnY3BqbXZ4eXlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMwNjI3NzcsImV4cCI6MjA1ODYzODc3N30.mJcvD7csnwt8u2dR4_5PeYIRb6SWjgsbt23sHFY2HGM',
+  );
   runApp(MyApp());
 }
 
@@ -33,6 +43,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -136,6 +148,8 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
+      GigCreate(),
+      ImageUploadScreen(),
       Dashboad(),
       SignPage(),
       ProfilePage(),
