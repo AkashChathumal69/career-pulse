@@ -1,3 +1,4 @@
+import 'package:career_pulse/model/gig_model.dart';
 import 'package:career_pulse/model/message.dart';
 import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:career_pulse/service/chat/chat_service.dart';
@@ -27,6 +28,7 @@ class _ChatPageState extends State<ChatPage> {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController _messageController = TextEditingController();
   Gig_firestote_function _gigFirestore = Gig_firestote_function();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -45,6 +47,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void dispose() {
     _messageController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -144,7 +147,16 @@ class _ChatPageState extends State<ChatPage> {
           return const Center(child: Text('No messages yet'));
         }
 
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (_scrollController.hasClients) {
+            _scrollController.jumpTo(
+              _scrollController.position.maxScrollExtent,
+            );
+          }
+        });
+
         return ListView(
+          controller: _scrollController,
           children:
               snapshot.data!.docs
                   .map<Widget>((doc) => _buildMessageItem(doc, context))
@@ -167,20 +179,31 @@ class _ChatPageState extends State<ChatPage> {
 
     if (message.gigId != null) {
       //get gig details from firestore
-      _gigFirestore.getGigById(message.senderId, message.gigId!).then((gig) {
-        if (gig != null) {
-          return ListTile(
-            title: Text(gig.gig_title),
-            subtitle: Text(gig.description),
-            trailing: const Icon(Icons.arrow_forward),
-            onTap: () {
-              // Navigate to gig details page
-            },
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      });
+
+      Future<GigModel?> gigModel = _gigFirestore.getGigById(
+        message.senderId,
+        message.gigId!,
+      );
+
+      return FutureBuilder<GigModel?>(
+        future: gigModel,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(child: Text('No gig details available'));
+          } else {
+            final gig = snapshot.data!;
+            return ListTile(
+              title: Text(gig.gig_title),
+              subtitle: Text(gig.description),
+              leading: Image.network(gig.imageUrl),
+            );
+          }
+        },
+      );
     }
 
     return Padding(
