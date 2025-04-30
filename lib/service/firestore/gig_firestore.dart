@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Gig_firestote_function {
-  Future<void> addGig(GigModel gigModel , BuildContext context) async {
+  Future<void> addGig(GigModel gigModel, BuildContext context) async {
     try {
       //create gig in Firestore
       final gigRef =
@@ -24,14 +24,14 @@ class Gig_firestote_function {
     }
   }
 
-
   Future<List<GigModel>> getGigs() async {
     try {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('gig')
-          .get();
+      final snapshot =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection('gig')
+              .get();
 
       return snapshot.docs.map((doc) => GigModel.fromMap(doc.data())).toList();
     } catch (e) {
@@ -39,6 +39,7 @@ class Gig_firestote_function {
       return [];
     }
   }
+
   Future<void> deleteGig(String gigId) async {
     try {
       await FirebaseFirestore.instance
@@ -52,14 +53,15 @@ class Gig_firestote_function {
     }
   }
 
-  Future<GigModel?> getGigById( String userId , String gigId ) async {
+  Future<GigModel?> getGigById(String userId, String gigId) async {
     try {
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userId!)
-          .collection('gig')
-          .doc(gigId)
-          .get();
+      final doc =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId!)
+              .collection('gig')
+              .doc(gigId)
+              .get();
 
       if (doc.exists) {
         return GigModel.fromMap(doc.data()!);
@@ -71,5 +73,5 @@ class Gig_firestote_function {
       print('Error fetching gig: $e');
       return null;
     }
-  }	
+  }
 }
