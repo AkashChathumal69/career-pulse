@@ -13,7 +13,11 @@ class ChatService {
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  Future<void> sendMessage(String receiverId, String? message , String? gigId) async {
+  Future<void> sendMessage(
+    String receiverId,
+    String? message,
+    String? gigId,
+  ) async {
     try {
       //get the current user data
       final currentUser = user!.uid;
@@ -62,7 +66,7 @@ class ChatService {
         .collection('chat_rooms')
         .doc(chatRoomId)
         .collection('messages')
-        .orderBy('timestamp', descending: true)
+        .orderBy('timestamp')
         .snapshots();
   }
 }
