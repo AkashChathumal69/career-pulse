@@ -8,7 +8,9 @@ import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/pages/gig_page.dart';
 
 import 'package:career_pulse/pages/home.dart';
+import 'package:career_pulse/pages/location.dart';
 import 'package:career_pulse/pages/profile.dart';
+import 'package:career_pulse/pages/searchbar.dart';
 import 'package:career_pulse/pages/signup.dart';
 import 'package:career_pulse/pages/login.dart';
 import 'package:career_pulse/pages/worker_profile.dart';
@@ -151,18 +153,11 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
-      GigPage(
-        description: "cvbcvbcvbcbcvcv",
-        gigTitle: "cbxcbxcbcbcvb",
-        imageUrl:
-            "https://pfavuxcsstgcpjmvxyyp.supabase.co/storage/v1/object/public/gigimages/1745127370826_1000000035.jpg",
-        keywords: ["bdfgfdgdfg", "dfgdfgdfg", "gdfgdfgfdg", "fdgdfgdfgfdg"],
-        occupation: "Mechanic",
-        uid: "hVPZ7b2WDTeEwnfTscHWfiFqcSz2",
-      ),
+      LiveLocationExample(), // Replace with actual Home Page
       Dashboad(),
+      SearchPage(),
       ChatUserPage(), // Replace with actual Chat Page
-      
+
       ProfilePage(),
       WorkerProfile(),
       GigCreate(),
