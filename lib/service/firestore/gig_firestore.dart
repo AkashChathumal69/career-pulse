@@ -74,4 +74,58 @@ class Gig_firestote_function {
       return null;
     }
   }
+
+  Future<List<String>> fetchAllKeywords() async {
+    final firestore = FirebaseFirestore.instance;
+    List<String> keywordsList = [];
+
+    final usersSnapshot = await firestore.collection('users').get();
+
+    for (var userDoc in usersSnapshot.docs) {
+      final gigSnapshot =
+          await firestore
+              .collection('users')
+              .doc(userDoc.id)
+              .collection('gig')
+              .get();
+
+      for (var gigDoc in gigSnapshot.docs) {
+        final data = gigDoc.data();
+        if (data.containsKey('keywords')) {
+          List<dynamic> keywords = data['keywords'];
+          keywordsList.addAll(keywords.map((e) => e.toString()));
+        }
+      }
+    }
+
+    return keywordsList.toSet().toList(); // remove duplicates
+  }
+
+  Future<List<GigModel>> searchGigs(String keyword) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final usersSnapshot = await firestore.collection('users').get();
+
+      List<GigModel> gigs = [];
+
+      for (var userDoc in usersSnapshot.docs) {
+        final gigSnapshot =
+            await firestore
+                .collection('users')
+                .doc(userDoc.id)
+                .collection('gig')
+                .where('keywords', arrayContains: keyword)
+                .get();
+
+        gigs.addAll(
+          gigSnapshot.docs.map((doc) => GigModel.fromMap(doc.data())),
+        );
+      }
+
+      return gigs;
+    } catch (e) {
+      print('Error searching gigs: $e');
+      return [];
+    }
+  }
 }
