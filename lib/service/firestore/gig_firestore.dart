@@ -14,6 +14,14 @@ class Gig_firestote_function {
               .collection('gig')
               .doc();
 
+      final metadata = FirebaseFirestore.instance
+          .collection('metadata')
+          .doc("keywords");
+
+      await metadata.set({
+        'keywords': FieldValue.arrayUnion(gigModel.keywords),
+      }, SetOptions(merge: true));
+
       await gigRef.set(gigModel.toMap());
       // Show success message after gig creation
       ScaffoldMessenger.of(
@@ -76,29 +84,16 @@ class Gig_firestote_function {
   }
 
   Future<List<String>> fetchAllKeywords() async {
-    final firestore = FirebaseFirestore.instance;
-    List<String> keywordsList = [];
-
-    final usersSnapshot = await firestore.collection('users').get();
-
-    for (var userDoc in usersSnapshot.docs) {
-      final gigSnapshot =
-          await firestore
-              .collection('users')
-              .doc(userDoc.id)
-              .collection('gig')
-              .get();
-
-      for (var gigDoc in gigSnapshot.docs) {
-        final data = gigDoc.data();
-        if (data.containsKey('keywords')) {
-          List<dynamic> keywords = data['keywords'];
-          keywordsList.addAll(keywords.map((e) => e.toString()));
-        }
-      }
+    final doc =
+        await FirebaseFirestore.instance
+            .collection('metadata')
+            .doc('keywords')
+            .get();
+    if (doc.exists && doc.data() != null) {
+      List<dynamic> keywords = doc['keywords'];
+      return keywords.map((e) => e.toString()).toSet().toList();
     }
-
-    return keywordsList.toSet().toList(); // remove duplicates
+    return [];
   }
 
   Future<List<GigModel>> searchGigs(String keyword) async {
