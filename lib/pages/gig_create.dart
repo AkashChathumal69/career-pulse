@@ -27,6 +27,7 @@ class _GigCreateState extends State<GigCreate> {
   final TextEditingController _jobTitleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _keywordsController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
   String? _selectedCategory;
 
   Future<void> _pickImage() async {
@@ -71,17 +72,17 @@ class _GigCreateState extends State<GigCreate> {
       occupation: _selectedCategory!,
       description: _descriptionController.text,
       imageUrl: _uploadedImageUrl ?? '', // Use the uploaded image URL
+      location: _locationController.text,
       keywords: _keywords,
       uid: FirebaseAuth.instance.currentUser!.uid,
     );
-
 
     // Save the gig to Firestore
 
     Gig_firestote_function gigFirestoreFunction = Gig_firestote_function();
 
     await gigFirestoreFunction.addGig(gigModel, context);
-        
+
     // Clear the form fields after submission
     _jobTitleController.clear();
     _descriptionController.clear();
@@ -90,7 +91,6 @@ class _GigCreateState extends State<GigCreate> {
     _uploadedImageUrl = null;
     setState(() {}); // Refresh the UI
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,6 @@ class _GigCreateState extends State<GigCreate> {
                     children: [
                       GestureDetector(
                         onTap: () {
-
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -122,7 +121,6 @@ class _GigCreateState extends State<GigCreate> {
                             Icons.arrow_back,
                             color: const Color.fromARGB(255, 8, 82, 139),
                           ),
-
                         ),
                       ),
                       SizedBox(width: 50),
@@ -140,7 +138,6 @@ class _GigCreateState extends State<GigCreate> {
                 SizedBox(height: 40),
 
                 TextField(
-
                   controller: _jobTitleController,
 
                   decoration: InputDecoration(
@@ -153,6 +150,24 @@ class _GigCreateState extends State<GigCreate> {
                     ),
                     labelText: "Job Title",
                     hintText: 'I do electric works',
+                  ),
+                ),
+
+                SizedBox(height: 10),
+
+                TextField(
+                  controller: _locationController,
+
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                        width: 2,
+                      ),
+                    ),
+                    labelText: "Location",
+                    hintText: 'Colombo',
                   ),
                 ),
 
@@ -193,7 +208,6 @@ class _GigCreateState extends State<GigCreate> {
                 ),
                 SizedBox(height: 10),
                 TextField(
-
                   controller: _descriptionController,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
@@ -205,13 +219,11 @@ class _GigCreateState extends State<GigCreate> {
                     ),
 
                     hintText: "Job Description",
-
                   ),
                 ),
                 SizedBox(height: 10),
                 // Image Upload Box
                 GestureDetector(
-
                   onTap: _pickImage,
 
                   child: Container(
@@ -252,9 +264,8 @@ class _GigCreateState extends State<GigCreate> {
                   ),
                 ),
                 SizedBox(height: 10),
-                // Add this to the class variables
-         
 
+                // Add this to the class variables
                 TextField(
                   controller: _keywordsController,
                   decoration: InputDecoration(
@@ -305,7 +316,6 @@ class _GigCreateState extends State<GigCreate> {
                           .toList(),
                 ),
 
-
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submitGig,
@@ -321,7 +331,6 @@ class _GigCreateState extends State<GigCreate> {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
-
               ],
             ),
           ),

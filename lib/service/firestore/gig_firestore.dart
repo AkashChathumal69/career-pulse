@@ -33,7 +33,7 @@ class Gig_firestote_function {
               .collection('gig')
               .get();
 
-      return snapshot.docs.map((doc) => GigModel.fromMap(doc.data())).toList();
+      return snapshot.docs.map((doc) => GigModel.fromSnapshot(doc)).toList();
     } catch (e) {
       print('Error fetching gigs: $e');
       return [];
@@ -64,7 +64,7 @@ class Gig_firestote_function {
               .get();
 
       if (doc.exists) {
-        return GigModel.fromMap(doc.data()!);
+        return GigModel.fromSnapshot(doc!);
       } else {
         print('Gig not found');
         return null;
@@ -117,14 +117,42 @@ class Gig_firestote_function {
                 .where('keywords', arrayContains: keyword)
                 .get();
 
-        gigs.addAll(
-          gigSnapshot.docs.map((doc) => GigModel.fromMap(doc.data())),
-        );
+        gigs.addAll(gigSnapshot.docs.map((doc) => GigModel.fromSnapshot(doc)));
       }
 
       return gigs;
     } catch (e) {
       print('Error searching gigs: $e');
+      return [];
+    }
+  }
+
+  Future<List<GigModel>> searchGigFilterLocation(
+    String keyword,
+    String location,
+  ) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final usersSnapshot = await firestore.collection('users').get();
+
+      List<GigModel> gigs = [];
+
+      for (var userDoc in usersSnapshot.docs) {
+        final gigSnapshot =
+            await firestore
+                .collection('users')
+                .doc(userDoc.id)
+                .collection('gig')
+                .where('keywords', arrayContains: keyword)
+                .where('location', isEqualTo: location)
+                .get();
+
+        gigs.addAll(gigSnapshot.docs.map((doc) => GigModel.fromSnapshot(doc)));
+      }
+
+      return gigs;
+    } catch (e) {
+      print('Error searching gigs with filter: $e');
       return [];
     }
   }

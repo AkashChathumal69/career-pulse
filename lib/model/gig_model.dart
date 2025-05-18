@@ -1,16 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class GigModel {
+  String? gig_id;
   String gig_title;
   String occupation;
   String description;
   String imageUrl;
   String uid;
+  String location;
   List<String> keywords;
 
   GigModel({
+    this.gig_id,
     required this.gig_title,
     required this.occupation,
     required this.description,
     required this.imageUrl,
+    required this.location,
     required this.uid,
     required this.keywords,
   });
@@ -23,19 +29,23 @@ class GigModel {
       'occupation': occupation,
       'description': description,
       'imageUrl': imageUrl,
+      'location': location,
       'keywords': keywords,
     };
   }
 
-  // Convert JSON to model (for Firestore)
-  factory GigModel.fromMap(Map<String, dynamic> map) {
+  // Convert JSON to model
+  factory GigModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final data = doc.data()!;
     return GigModel(
-      gig_title: map['gig_title'],
-      occupation: map['occupation'],
-      description: map['description'],
-      imageUrl: map['imageUrl'],
-      uid: map['uid'],
-      keywords: List<String>.from(map['keywords'] ?? []),
+      gig_id: doc.id, // ← here’s your Firestore key
+      gig_title: data['gig_title'],
+      occupation: data['occupation'],
+      description: data['description'],
+      imageUrl: data['imageUrl'],
+      location: data['location'],
+      uid: data['uid'],
+      keywords: List<String>.from(data['keywords'] ?? []),
     );
   }
 }
