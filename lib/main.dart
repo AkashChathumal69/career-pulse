@@ -153,7 +153,6 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
-      LiveLocationExample(), // Replace with actual Home Page
       Dashboad(),
       SearchPage(),
       ChatUserPage(), // Replace with actual Chat Page

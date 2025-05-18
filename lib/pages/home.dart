@@ -1,3 +1,4 @@
+import 'package:career_pulse/pages/Reusable%20Widgets/searchbar.dart';
 import 'package:career_pulse/pages/category.dart';
 import 'package:career_pulse/pages/gig_create.dart';
 import 'package:career_pulse/service/auth/auth_service.dart';
@@ -90,30 +91,7 @@ class _DashboadState extends State<Dashboad> {
             //search bar
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Container(
-                margin: EdgeInsets.only(top: 20),
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.search, color: Colors.blueGrey),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Search",
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(color: Colors.blueGrey),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: SearchBarWidget(),
             ),
             SizedBox(height: 10),
             //Categories topic
