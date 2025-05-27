@@ -38,7 +38,7 @@ class GigModel {
   factory GigModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     final data = doc.data()!;
     return GigModel(
-      gig_id: doc.id, // ← here’s your Firestore key
+      gig_id: doc.id,
       gig_title: data['gig_title'],
       occupation: data['occupation'],
       description: data['description'],

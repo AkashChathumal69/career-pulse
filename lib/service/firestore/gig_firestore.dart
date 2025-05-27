@@ -151,4 +151,15 @@ class Gig_firestote_function {
       return [];
     }
   }
+
+  Future<List<GigModel>> getAllGigsForUser(String userId) async {
+    final snapshot =
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(userId)
+            .collection("gig")
+            .get();
+
+    return snapshot.docs.map((doc) => GigModel.fromSnapshot(doc)).toList();
+  }
 }
