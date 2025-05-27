@@ -1,22 +1,23 @@
 import 'package:career_pulse/firebase_options.dart';
 
 import 'package:career_pulse/pages/ImageUploadtest.dart';
+import 'package:career_pulse/pages/UserPage.dart';
 import 'package:career_pulse/pages/category.dart';
-import 'package:career_pulse/pages/chat_page.dart';
+
 import 'package:career_pulse/pages/chat_user_page.dart';
 import 'package:career_pulse/pages/gig_create.dart';
-import 'package:career_pulse/pages/gig_page.dart';
 
 import 'package:career_pulse/pages/home.dart';
-import 'package:career_pulse/pages/location.dart';
+
 import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/pages/searchbar.dart';
 import 'package:career_pulse/pages/signup.dart';
-import 'package:career_pulse/pages/login.dart';
+
 import 'package:career_pulse/pages/worker_profile.dart';
-import 'package:career_pulse/service/auth/auth_gate.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -24,6 +25,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await Supabase.initialize(
     url: 'https://pfavuxcsstgcpjmvxyyp.supabase.co',
     anonKey:
@@ -153,10 +155,10 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
+      UserPage(),
       Dashboad(),
       SearchPage(),
-      ChatUserPage(), // Replace with actual Chat Page
-
+      ChatUserPage(),
       ProfilePage(),
       WorkerProfile(),
       GigCreate(),

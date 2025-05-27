@@ -27,20 +27,21 @@ class _ChatPageState extends State<ChatPage> {
   final ChatService _chatService = ChatService();
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController _messageController = TextEditingController();
-  Gig_firestote_function _gigFirestore = Gig_firestote_function();
+  final Gig_firestote_function _gigFirestore = Gig_firestote_function();
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.gigId != null) {
+    // Only send initial message if text exists (from gig)
+    if (widget.gigId != null && _messageController.text.isNotEmpty) {
       _chatService.sendMessage(
         widget.receiverId,
         _messageController.text,
         widget.gigId,
       );
-      _messageController.clear(); // Clear it after sending
+      _messageController.clear();
     }
   }
 
@@ -74,56 +75,161 @@ class _ChatPageState extends State<ChatPage> {
         body: Column(
           children: [
             Expanded(child: _buildMessageList()),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _messageController,
-                      decoration: InputDecoration(
-                        hintText: 'Type a message',
-                        hintStyle: TextStyle(color: Colors.grey.shade500),
-                        filled: true,
-                        fillColor: Colors.grey.shade100,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.send, color: Colors.white),
-                      onPressed: () => sendMessage(context),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _buildMessageInput(context),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildMessageInput(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(color: Colors.black12, spreadRadius: 1, blurRadius: 5),
+        ],
+      ),
+      child: Row(
+        children: [
+          ElevatedButton.icon(
+            icon: const Icon(Icons.work_outline, color: Colors.white),
+            label: const Text(
+              "Proposal",
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () => _showJobProposalDialog(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: TextField(
+              controller: _messageController,
+              decoration: InputDecoration(
+                hintText: 'Type a message',
+                hintStyle: TextStyle(color: Colors.grey.shade500),
+                filled: true,
+                fillColor: Colors.grey.shade100,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.send, color: Colors.white),
+              onPressed: () => sendMessage(context),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showJobProposalDialog(BuildContext context) {
+    GigModel? selectedGig;
+    int dateCount = 1;
+    final messageController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Send Job Proposal"),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FutureBuilder<List<GigModel>>(
+                  future: _gigFirestore.getAllGigsForUser(user!.uid),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Text('No gigs available from this user');
+                    }
+
+                    return DropdownButtonFormField<GigModel>(
+                      decoration: const InputDecoration(
+                        labelText: 'Select Gig',
+                      ),
+                      items:
+                          snapshot.data!
+                              .map(
+                                (gig) => DropdownMenuItem(
+                                  value: gig,
+                                  child: Text(gig.gig_title),
+                                ),
+                              )
+                              .toList(),
+                      onChanged: (gig) => selectedGig = gig,
+                    );
+                  },
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: "Select Date Count (Days)",
+                  ),
+                  initialValue: '1',
+                  onChanged: (val) => dateCount = int.tryParse(val) ?? 1,
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: messageController,
+                  maxLines: 3,
+                  decoration: const InputDecoration(labelText: "Message"),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            ElevatedButton(
+              child: const Text("Send Proposal"),
+              onPressed: () {
+                if (selectedGig != null) {
+                  _chatService.sendMessage(
+                    widget.receiverId,
+                    "${messageController.text}\n\n[Duration: $dateCount days]",
+                    selectedGig!.gig_id,
+                  );
+                  Navigator.of(context).pop();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Please select a gig")),
+                  );
+                }
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -158,9 +264,9 @@ class _ChatPageState extends State<ChatPage> {
         return ListView(
           controller: _scrollController,
           children:
-              snapshot.data!.docs
-                  .map<Widget>((doc) => _buildMessageItem(doc, context))
-                  .toList(),
+              snapshot.data!.docs.map((doc) {
+                return _buildMessageItem(doc, context);
+              }).toList(),
         );
       },
     );
@@ -169,37 +275,71 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageItem(DocumentSnapshot doc, BuildContext context) {
     final message = Message.fromMap(doc.data() as Map<String, dynamic>);
     final isSentByMe = message.senderId == user?.uid;
-
-    var alignment = isSentByMe ? Alignment.centerRight : Alignment.centerLeft;
-
-    final time =
-        message.timestamp != null
-            ? "${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}"
-            : "";
+    final alignment = isSentByMe ? Alignment.centerRight : Alignment.centerLeft;
 
     if (message.gigId != null) {
-      //get gig details from firestore
-
-      Future<GigModel?> gigModel = _gigFirestore.getGigById(
-        message.senderId,
-        message.gigId!,
-      );
-
       return FutureBuilder<GigModel?>(
-        future: gigModel,
+        future: _gigFirestore.getGigById(message.senderId, message.gigId!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Padding(
+              padding: EdgeInsets.all(8),
+              child: Center(child: CircularProgressIndicator()),
+            );
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data == null) {
-            return const Center(child: Text('No gig details available'));
+            return const Center(child: Text('Gig not found'));
           } else {
             final gig = snapshot.data!;
-            return ListTile(
-              title: Text(gig.gig_title),
-              subtitle: Text(gig.description),
-              leading: Image.network(gig.imageUrl),
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+              child: Align(
+                alignment: alignment,
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.75,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        isSentByMe
+                            ? Theme.of(context).primaryColor.withOpacity(0.9)
+                            : Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          gig.imageUrl,
+                          height: 100,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        gig.gig_title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: isSentByMe ? Colors.white : Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        gig.description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isSentByMe ? Colors.white70 : Colors.black54,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             );
           }
         },
@@ -210,56 +350,23 @@ class _ChatPageState extends State<ChatPage> {
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
       child: Align(
         alignment: alignment,
-        child: ConstrainedBox(
+        child: Container(
+          padding: const EdgeInsets.all(12),
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.75,
           ),
-          child: Container(
-            decoration: BoxDecoration(
-              color:
-                  isSentByMe
-                      ? Theme.of(context).primaryColor.withOpacity(0.9)
-                      : Colors.grey.shade200,
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(16),
-                topRight: const Radius.circular(16),
-                bottomLeft:
-                    isSentByMe
-                        ? const Radius.circular(16)
-                        : const Radius.circular(4),
-                bottomRight:
-                    isSentByMe
-                        ? const Radius.circular(4)
-                        : const Radius.circular(16),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 5,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  message.message,
-                  style: TextStyle(
-                    color: isSentByMe ? Colors.white : Colors.black87,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  time,
-                  style: TextStyle(
-                    color: isSentByMe ? Colors.white70 : Colors.grey.shade600,
-                    fontSize: 11,
-                  ),
-                ),
-              ],
+          decoration: BoxDecoration(
+            color:
+                isSentByMe
+                    ? Theme.of(context).primaryColor.withOpacity(0.8)
+                    : Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            message.message,
+            style: TextStyle(
+              color: isSentByMe ? Colors.white : Colors.black87,
+              fontSize: 16,
             ),
           ),
         ),
