@@ -1,7 +1,6 @@
 import 'package:career_pulse/pages/Reusable%20Widgets/searchbar.dart';
 import 'package:career_pulse/pages/category.dart';
 import 'package:career_pulse/pages/gig_create.dart';
-import 'package:career_pulse/service/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -29,7 +28,7 @@ class _DashboadState extends State<Dashboad> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // hi Akash
+                  //profile image
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -62,31 +61,7 @@ class _DashboadState extends State<Dashboad> {
               ),
             ),
 
-            //rest of the widget remains the same
-            //sign out button
-            Container(
-              height: 50,
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue[300],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: TextButton(
-                  onPressed: () {
-                    AuthService().signOut(context);
-                  },
-                  child: Text(
-                    "Sign Out",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+           
 
             //search bar
             Padding(

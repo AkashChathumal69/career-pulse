@@ -1,3 +1,5 @@
+import 'package:career_pulse/pages/mygigpage.dart';
+import 'package:career_pulse/pages/profile.dart';
 import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:career_pulse/service/firestore/handle_user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -154,7 +156,16 @@ class _ProfilePageState extends State<UserPage> {
                         title: 'Update Profile',
                         subtitle: 'Change your personal information',
                         onTap: () {
-                          Navigator.pushNamed(context, '/update-profile');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => AuthGuard(child: ProfilePage()),
+                            ),
+                          );
+
+                        
+
                         },
                       ),
 
@@ -163,7 +174,12 @@ class _ProfilePageState extends State<UserPage> {
                         title: 'My Gigs',
                         subtitle: 'Manage your gigs and projects',
                         onTap: () {
-                          Navigator.pushNamed(context, '/my-gigs');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyGigPage(),
+                            ),
+                          );
                         },
                       ),
 

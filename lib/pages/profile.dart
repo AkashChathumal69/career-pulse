@@ -110,8 +110,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Header
+
                   Row(
                     children: [
+                      IconButton(
+                        icon: Icon(Icons.arrow_back, color: Colors.blue),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,6 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 24),
 
                   // Name

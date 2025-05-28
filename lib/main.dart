@@ -2,7 +2,7 @@ import 'package:career_pulse/firebase_options.dart';
 
 import 'package:career_pulse/pages/ImageUploadtest.dart';
 import 'package:career_pulse/pages/UserPage.dart';
-import 'package:career_pulse/pages/category.dart';
+
 
 import 'package:career_pulse/pages/chat_user_page.dart';
 import 'package:career_pulse/pages/gig_create.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
 
       home: MainScreen(),
 
-      // theme: ThemeData(fontFamily: 'Poppins'),
+      theme: ThemeData(fontFamily: 'Poppins'),
     );
   }
 }
@@ -63,19 +63,8 @@ class _MainScreenState extends State<MainScreen> {
     fontWeight: FontWeight.w600,
   );
 
-  static const List<Widget> _pages = <Widget>[
-    Dashboad(), // Home page
-    CategoryPage(), // Replace with your actual category page
-    ProfilePage(), // Replace with your actual profile page
-    SignPage(), // Replace with your actual sign-up or login page
-  ];
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text("Home", style: optionStyle),
-    Text("Categories", style: optionStyle),
-    Text("Search", style: optionStyle),
-    Text("Profile", style: optionStyle),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -155,16 +144,19 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget _getPage(int index) {
     return [
-      UserPage(),
       Dashboad(),
-      SearchPage(),
+
       ChatUserPage(),
+  
+      GigCreate(),
+      UserPage(),
       ProfilePage(),
       WorkerProfile(),
-      GigCreate(),
+      SearchPage(),
+     
       ImageUploadScreen(),
       SignPage(),
-      // Replace with actual Search Page
+      
     ][index];
   }
 }
