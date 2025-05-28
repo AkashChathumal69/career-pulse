@@ -41,6 +41,7 @@ class Gig_firestote_function {
               .collection('gig')
               .get();
 
+      print("Fetched ${snapshot.docs.length} gigs");
       return snapshot.docs.map((doc) => GigModel.fromSnapshot(doc)).toList();
     } catch (e) {
       print('Error fetching gigs: $e');

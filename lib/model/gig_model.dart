@@ -35,17 +35,18 @@ class GigModel {
   }
 
   // Convert JSON to model
-  factory GigModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
-    final data = doc.data()!;
+factory GigModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
+    final data = doc.data() ?? {};
     return GigModel(
       gig_id: doc.id,
-      gig_title: data['gig_title'],
-      occupation: data['occupation'],
-      description: data['description'],
-      imageUrl: data['imageUrl'],
-      location: data['location'],
-      uid: data['uid'],
+      gig_title: data['gig_title'] ?? '',
+      occupation: data['occupation'] ?? '',
+      description: data['description'] ?? '',
+      imageUrl: data['imageUrl'] ?? '',
+      location: data['location'] ?? '',
+      uid: data['uid'] ?? '',
       keywords: List<String>.from(data['keywords'] ?? []),
     );
   }
+
 }
