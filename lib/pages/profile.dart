@@ -1,4 +1,5 @@
 import 'package:career_pulse/model/user_model.dart';
+import 'package:career_pulse/pages/home.dart';
 import 'package:career_pulse/service/auth/auth_gate.dart';
 import 'package:career_pulse/service/firestore/handle_user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -151,6 +152,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
 
+                  const SizedBox(height: 24),
+
+
+                  
                   const SizedBox(height: 24),
 
                   // Name
