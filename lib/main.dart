@@ -42,6 +42,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
+
+
+
+
+
       home: MainScreen(),
 
       theme: ThemeData(fontFamily: 'Poppins'),
@@ -70,19 +75,30 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Color.fromARGB(255, 0, 46, 125),
-        actions: [
-          if (FirebaseAuth.instance.currentUser != null)
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                setState(() {
-                  _selectedIndex = 0;
-                });
-              },
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 0, 46, 125),
+        title: const Text(
+          'CareerPulse',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.2,
+          ),
+        ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 0, 46, 125),
+                Color.fromARGB(255, 0, 35, 114),
+              ],
             ),
-        ],
+          ),
+        ),
       ),
       body: _getPage(_selectedIndex), // Call _getPage method
       bottomNavigationBar: Container(
@@ -131,7 +147,7 @@ class _MainScreenState extends State<MainScreen> {
               haptic: true,
               tabs: [
                 GButton(icon: Icons.home, text: 'Home'),
-                GButton(icon: Icons.category, text: 'Categories'),
+                GButton(icon: Icons.category, text: 'Gig Create'),
                 GButton(icon: Icons.message, text: 'Chats'),
                 GButton(icon: Icons.person, text: 'Profile'),
               ],
@@ -146,9 +162,11 @@ class _MainScreenState extends State<MainScreen> {
     return [
       Dashboad(),
 
+      GigCreate(),
+
       ChatUserPage(),
   
-      GigCreate(),
+     
       UserPage(),
       ProfilePage(),
       WorkerProfile(),

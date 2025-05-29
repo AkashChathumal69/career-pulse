@@ -62,30 +62,7 @@ class _DashboadState extends State<Dashboad> {
             ),
 
 
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton.icon(
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => Dashboad()),
-                    (route) => false,
-                  );
-                },
-                icon: const Icon(Icons.logout, color: Colors.white),
-                label: const Text(
-                  'Logout',
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-            ),
+           
 
            
 
