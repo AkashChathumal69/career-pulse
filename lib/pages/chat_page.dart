@@ -35,7 +35,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
 
     // Only send initial message if text exists (from gig)
-    if (widget.gigId != null && _messageController.text.isNotEmpty) {
+    if (widget.gigId != null) {
       _chatService.sendMessage(
         widget.receiverId,
         _messageController.text,
