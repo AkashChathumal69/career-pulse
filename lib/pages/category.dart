@@ -1,8 +1,6 @@
-
 import 'package:career_pulse/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:career_pulse/main.dart';
-
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -23,7 +21,6 @@ class CategoryPage extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -66,7 +63,6 @@ class CategoryPage extends StatelessWidget {
                   child: Container(
                     child: Row(
                       children: [
-
                         Container(
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 0, 35, 114),
@@ -116,7 +112,6 @@ class CategoryPage extends StatelessWidget {
                               ),
                             ],
                           ),
-
                         ),
                       ],
                     ),
@@ -164,7 +159,10 @@ class CategoryPage extends StatelessWidget {
                                 Icon(Icons.star, color: Colors.yellow),
                                 Text('4.5', style: TextStyle(fontSize: 15)),
                                 SizedBox(width: 80),
-                                Icon(Icons.favorite, color: Colors.red),
+                                Icon(
+                                  Icons.favorite,
+                                  color: const Color.fromARGB(255, 252, 18, 1),
+                                ),
                               ],
                             ),
                             SizedBox(height: 10),
@@ -187,10 +185,7 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text(
-                                  "Virat Kholi",
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                                Text("Lakshan", style: TextStyle(fontSize: 12)),
                               ],
                             ),
                             Row(
@@ -277,10 +272,7 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text(
-                                  "Virat Kholi",
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                                Text("Pathum", style: TextStyle(fontSize: 12)),
                               ],
                             ),
                             Row(
@@ -290,13 +282,9 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text(
-                                  "Homagama",
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                                Text("Galle", style: TextStyle(fontSize: 12)),
                               ],
                             ),
-
                           ],
                         ),
                         SizedBox(height: 5),
@@ -345,7 +333,6 @@ class CategoryPage extends StatelessWidget {
               //     ),
               //   ),
               // ),
-
             ],
           ),
         ),

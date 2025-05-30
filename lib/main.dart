@@ -136,7 +136,7 @@ class _MainScreenState extends State<MainScreen> {
               tabs: [
                 GButton(icon: Icons.home, text: 'Home'),
                 GButton(icon: Icons.category, text: 'Categories'),
-                GButton(icon: Icons.message, text: 'Chats'),
+                GButton(icon: Icons.message, text: 'Chat'),
                 GButton(icon: Icons.person, text: 'Profile'),
               ],
             ),

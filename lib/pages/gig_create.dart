@@ -96,7 +96,6 @@ class _GigCreateState extends State<GigCreate> {
     setState(() {}); // Refresh the UI
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +111,6 @@ class _GigCreateState extends State<GigCreate> {
                     children: [
                       GestureDetector(
                         onTap: () {
-
                           Navigator.pop(context);
                         },
                         child: Container(
@@ -127,7 +125,6 @@ class _GigCreateState extends State<GigCreate> {
                             Icons.arrow_back,
                             color: const Color.fromARGB(255, 8, 82, 139),
                           ),
-
                         ),
                       ),
                       SizedBox(width: 50),
@@ -135,7 +132,7 @@ class _GigCreateState extends State<GigCreate> {
                         "GIG CREATE",
                         style: TextStyle(
                           fontSize: 30,
-                          color: Colors.indigo,
+                          color: Color.fromARGB(255, 0, 46, 125),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -145,7 +142,6 @@ class _GigCreateState extends State<GigCreate> {
                 SizedBox(height: 40),
 
                 TextField(
-
                   controller: _jobTitleController,
 
                   decoration: InputDecoration(
@@ -198,7 +194,6 @@ class _GigCreateState extends State<GigCreate> {
                 ),
                 SizedBox(height: 10),
                 TextField(
-
                   controller: _descriptionController,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
@@ -210,13 +205,11 @@ class _GigCreateState extends State<GigCreate> {
                     ),
 
                     hintText: "Job Description",
-
                   ),
                 ),
                 SizedBox(height: 10),
                 // Image Upload Box
                 GestureDetector(
-
                   onTap: _pickImage,
 
                   child: Container(
@@ -242,7 +235,7 @@ class _GigCreateState extends State<GigCreate> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  "Upload gig image",
+                                  "Upload Gig Image",
                                   style: TextStyle(color: Colors.grey),
                                 ),
                                 Text(
@@ -267,7 +260,6 @@ class _GigCreateState extends State<GigCreate> {
                   ),
                 ),
 
-
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submitGig,
@@ -283,7 +275,6 @@ class _GigCreateState extends State<GigCreate> {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
-
               ],
             ),
           ),
