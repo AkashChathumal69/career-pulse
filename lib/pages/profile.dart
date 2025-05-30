@@ -226,12 +226,21 @@ class _ProfilePageState extends State<ProfilePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
+
+                      child: const Text(
+                        'Save Profile.',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+
                     ),
                     child: const Text(
                       'SAVE PROFILE',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+
                       ),
                     ),
                   ),

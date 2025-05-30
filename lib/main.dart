@@ -147,6 +147,10 @@ class _MainScreenState extends State<MainScreen> {
               haptic: true,
               tabs: [
                 GButton(icon: Icons.home, text: 'Home'),
+
+                GButton(icon: Icons.category, text: 'Categories'),
+                GButton(icon: Icons.message, text: 'Chat'),
+
                 GButton(icon: Icons.category, text: 'Gig Create'),
                 GButton(icon: Icons.message, text: 'Chats'),
                 GButton(icon: Icons.person, text: 'Profile'),

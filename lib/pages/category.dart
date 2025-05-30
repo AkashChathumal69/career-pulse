@@ -159,7 +159,10 @@ class CategoryPage extends StatelessWidget {
                                 Icon(Icons.star, color: Colors.yellow),
                                 Text('4.5', style: TextStyle(fontSize: 15)),
                                 SizedBox(width: 80),
-                                Icon(Icons.favorite, color: Colors.red),
+                                Icon(
+                                  Icons.favorite,
+                                  color: const Color.fromARGB(255, 252, 18, 1),
+                                ),
                               ],
                             ),
                             SizedBox(height: 10),
@@ -182,10 +185,7 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text(
-                                  "Virat Kholi",
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                                Text("Lakshan", style: TextStyle(fontSize: 12)),
                               ],
                             ),
                             Row(
@@ -272,10 +272,7 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text(
-                                  "Virat Kholi",
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                                Text("Pathum", style: TextStyle(fontSize: 12)),
                               ],
                             ),
                             Row(
@@ -285,10 +282,7 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text(
-                                  "Homagama",
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                                Text("Galle", style: TextStyle(fontSize: 12)),
                               ],
                             ),
                           ],
@@ -299,6 +293,48 @@ class CategoryPage extends StatelessWidget {
                   ),
                 ),
               ),
+
+
+              // SizedBox(height: 10),
+
+              // Center(
+              //   child: Container(
+              //     height: 120,
+              //     width: 350,
+              //     decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(20),
+              //     ),
+
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(height: 10),
+              // Center(
+              //   child: Container(
+              //     height: 120,
+              //     width: 350,
+              //     decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(20),
+              //     ),
+
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
             ],
           ),
         ),

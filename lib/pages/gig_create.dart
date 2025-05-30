@@ -128,7 +128,7 @@ class _GigCreateState extends State<GigCreate> {
                         "GIG CREATE",
                         style: TextStyle(
                           fontSize: 30,
-                          color: Colors.indigo,
+                          color: Color.fromARGB(255, 0, 46, 125),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -249,7 +249,7 @@ class _GigCreateState extends State<GigCreate> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  "Upload gig image",
+                                  "Upload Gig Image",
                                   style: TextStyle(color: Colors.grey),
                                 ),
                                 Text(
@@ -278,6 +278,7 @@ class _GigCreateState extends State<GigCreate> {
                   ),
                   onSubmitted: (value) {
                     if (value.trim().isEmpty) return;
+
 
                     setState(() {
                       if (!_keywords.contains(value.trim())) {
@@ -315,6 +316,7 @@ class _GigCreateState extends State<GigCreate> {
                           )
                           .toList(),
                 ),
+
 
                 SizedBox(height: 20),
                 ElevatedButton(
