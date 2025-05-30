@@ -187,6 +187,22 @@ class _DashboadState extends State<Dashboad> {
                         ),
                       ),
                     ),
+                    SizedBox(width: 20),
+                    Container(
+                      height: 130,
+                      width: 180,
+                      decoration: BoxDecoration(
+                        color: Colors.blue[300],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          "assets/mechanic.png",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
