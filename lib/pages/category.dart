@@ -294,6 +294,7 @@ class CategoryPage extends StatelessWidget {
                 ),
               ),
 
+
               // SizedBox(height: 10),
 
               // Center(
@@ -333,6 +334,7 @@ class CategoryPage extends StatelessWidget {
               //     ),
               //   ),
               // ),
+
             ],
           ),
         ),

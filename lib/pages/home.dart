@@ -1,12 +1,19 @@
+import 'package:career_pulse/pages/Reusable%20Widgets/searchbar.dart';
 import 'package:career_pulse/pages/category.dart';
 import 'package:career_pulse/pages/gig_create.dart';
-import 'package:career_pulse/service/auth/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:career_pulse/main.dart';
 import 'package:share_plus/share_plus.dart';
 
-class Dashboad extends StatelessWidget {
+class Dashboad extends StatefulWidget {
   const Dashboad({super.key});
+
+  @override
+  State<Dashboad> createState() => _DashboadState();
+}
+
+class _DashboadState extends State<Dashboad> {
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +28,12 @@ class Dashboad extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // hi Akash
+                  //profile image
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hi, Akash!",
+                        "Hi, ${user?.displayName}",
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -48,65 +55,21 @@ class Dashboad extends StatelessWidget {
                       color: Colors.blue[300],
                       borderRadius: BorderRadius.circular(10),
                     ),
-
                     child: Icon(Icons.notifications, color: Colors.white),
                   ),
                 ],
               ),
             ),
 
-            //sign out button
-            Container(
-              height: 50,
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.blue[300],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: TextButton(
-                  onPressed: () {
-                    AuthService().signOut(context);
-                  },
-                  child: Text(
-                    "Sign Out",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+
+           
+
+           
 
             //search bar
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Container(
-                margin: EdgeInsets.only(top: 20),
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.search, color: Colors.blueGrey),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Search",
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(color: Colors.blueGrey),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: SearchBarWidget(),
             ),
             SizedBox(height: 10),
             //Categories topic
@@ -251,7 +214,6 @@ class Dashboad extends StatelessWidget {
                                       ),
 
                                       ElevatedButton(
-
                                         onPressed: () {
                                           Navigator.push(
                                             context,
@@ -260,7 +222,6 @@ class Dashboad extends StatelessWidget {
                                             ),
                                           );
                                         },
-
                                         child: Text('Apply Now'),
                                       ),
                                     ],
@@ -291,7 +252,6 @@ class Dashboad extends StatelessWidget {
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [Color(0xFF002E7D), Color(0xFF1E90FF)],
-
                                 begin: Alignment.topRight,
                                 end: Alignment.bottomLeft,
                               ),
@@ -325,7 +285,6 @@ class Dashboad extends StatelessWidget {
                                       ),
                                       SizedBox(height: 10),
                                       ElevatedButton(
-
                                         onPressed: () {
                                           Navigator.push(
                                             context,
@@ -335,7 +294,6 @@ class Dashboad extends StatelessWidget {
                                             ),
                                           );
                                         },
-
                                         child: Text('Discover'),
                                       ),
                                     ],
@@ -396,15 +354,12 @@ class Dashboad extends StatelessWidget {
                                   ),
                                   Center(
                                     child: ElevatedButton(
-
                                       onPressed: () {
                                         Share.share(
                                           'Check out this amazing app: https://career-pulse.com',
                                           subject: 'Career Pulse App',
                                         );
                                       },
-
-
                                       child: Text('Invite friends'),
                                     ),
                                   ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:career_pulse/model/gig_model.dart';
+import 'package:career_pulse/service/firestore/gig_firestore.dart';
 import 'package:career_pulse/service/supabase/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,10 +23,11 @@ class _GigCreateState extends State<GigCreate> {
 
   final bool _isUploading = false;
   String? _uploadedImageUrl;
-
+  List<String> _keywords = [];
   final TextEditingController _jobTitleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _keywordsController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
   String? _selectedCategory;
 
   Future<void> _pickImage() async {
@@ -70,22 +72,16 @@ class _GigCreateState extends State<GigCreate> {
       occupation: _selectedCategory!,
       description: _descriptionController.text,
       imageUrl: _uploadedImageUrl ?? '', // Use the uploaded image URL
+      location: _locationController.text,
+      keywords: _keywords,
       uid: FirebaseAuth.instance.currentUser!.uid,
     );
 
-    //create gig in Firestore
-    final gigRef =
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .collection('gig')
-            .doc();
+    // Save the gig to Firestore
 
-    await gigRef.set(gigModel.toMap());
-    // Show success message after gig creation
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text('Gig created successfully')));
+    Gig_firestote_function gigFirestoreFunction = Gig_firestote_function();
+
+    await gigFirestoreFunction.addGig(gigModel, context);
 
     // Clear the form fields after submission
     _jobTitleController.clear();
@@ -154,6 +150,24 @@ class _GigCreateState extends State<GigCreate> {
                     ),
                     labelText: "Job Title",
                     hintText: 'I do electric works',
+                  ),
+                ),
+
+                SizedBox(height: 10),
+
+                TextField(
+                  controller: _locationController,
+
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.blueAccent,
+                        width: 2,
+                      ),
+                    ),
+                    labelText: "Location",
+                    hintText: 'Colombo',
                   ),
                 ),
 
@@ -250,15 +264,59 @@ class _GigCreateState extends State<GigCreate> {
                   ),
                 ),
                 SizedBox(height: 10),
+
+                // Add this to the class variables
                 TextField(
+                  controller: _keywordsController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.blueAccent),
                     ),
-                    hintText: "Keywords",
+                    labelText: "Keywords",
+                    hintText: "Enter keyword and press Enter",
                   ),
+                  onSubmitted: (value) {
+                    if (value.trim().isEmpty) return;
+
+
+                    setState(() {
+                      if (!_keywords.contains(value.trim())) {
+                        if (_keywords.length >= 5) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Maximum 5 keywords allowed'),
+                            ),
+                          );
+                          return;
+                        }
+                        _keywords.add(value.trim());
+                      }
+                      // Clear the text field after adding the keyword
+                      _keywordsController.clear();
+                    });
+                  },
                 ),
+                SizedBox(height: 10),
+                Wrap(
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children:
+                      _keywords
+                          .map(
+                            (keyword) => Chip(
+                              label: Text(keyword),
+                              deleteIcon: Icon(Icons.close, size: 16),
+                              onDeleted: () {
+                                setState(() {
+                                  _keywords.remove(keyword);
+                                });
+                              },
+                            ),
+                          )
+                          .toList(),
+                ),
+
 
                 SizedBox(height: 20),
                 ElevatedButton(
