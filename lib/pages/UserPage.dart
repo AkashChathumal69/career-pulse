@@ -142,7 +142,7 @@ class _ProfilePageState extends State<UserPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Account Settings',
+                        'Account Setting',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -163,9 +163,6 @@ class _ProfilePageState extends State<UserPage> {
                                   (context) => AuthGuard(child: ProfilePage()),
                             ),
                           );
-
-                        
-
                         },
                       ),
 
@@ -192,7 +189,7 @@ class _ProfilePageState extends State<UserPage> {
 
                       _buildMenuCard(
                         icon: Icons.logout,
-                        title: 'Logout',
+                        title: 'Log out',
                         subtitle: 'Sign out from your account',
                         color: Colors.red.shade100,
                         iconColor: Colors.red,
