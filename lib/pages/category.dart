@@ -71,13 +71,11 @@ class CategoryPage extends StatelessWidget {
                           height: 40,
                           width: 100,
                           child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.center, // Center horizontally
-                            crossAxisAlignment:
-                                CrossAxisAlignment.center, // Center vertically
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(Icons.location_on, color: Colors.white),
-                              SizedBox(width: 5), // Space between Icon and Text
+                              SizedBox(width: 5),
                               Text(
                                 "Location",
                                 style: TextStyle(
@@ -168,7 +166,7 @@ class CategoryPage extends StatelessWidget {
                             SizedBox(height: 10),
 
                             Text(
-                              "Electrician",
+                              "Mechanic",
                               style: TextStyle(
                                 fontSize: 15,
 
@@ -185,7 +183,10 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text("Lakshan", style: TextStyle(fontSize: 12)),
+                                Text(
+                                  "Sripathi Udayakantha",
+                                  style: TextStyle(fontSize: 12),
+                                ),
                               ],
                             ),
                             Row(
@@ -195,10 +196,7 @@ class CategoryPage extends StatelessWidget {
                                   color: Colors.blue,
                                   size: 12,
                                 ),
-                                Text(
-                                  "Homagama",
-                                  style: TextStyle(fontSize: 12),
-                                ),
+                                Text("Kandy", style: TextStyle(fontSize: 12)),
                               ],
                             ),
                           ],
@@ -287,7 +285,7 @@ class CategoryPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 10),
                       ],
                     ),
                   ),

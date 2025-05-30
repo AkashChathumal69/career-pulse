@@ -53,7 +53,6 @@ class _ProfilePageState extends State<ProfilePage> {
     final userData = await _userDataHandler.getUserData(user);
     if (!mounted) return;
     if (userData != null) {
-      
       setState(() {
         _nameController.text = userData.name;
         _emailController.text = userData.email;
@@ -111,7 +110,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Header
-
                   Row(
                     children: [
                       IconButton(
@@ -154,8 +152,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   const SizedBox(height: 24),
 
-
-                  
                   const SizedBox(height: 24),
 
                   // Name
@@ -226,21 +222,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-
-                      child: const Text(
-                        'Save Profile.',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-
                     ),
                     child: const Text(
                       'SAVE PROFILE',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-
                       ),
                     ),
                   ),

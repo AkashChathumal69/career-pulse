@@ -37,7 +37,7 @@ class _SignPageState extends State<SignPage> {
 
                         // Topic
                         Text(
-                          'Create New Account',
+                          'Create a New Account',
                           style: GoogleFonts.poppins(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,

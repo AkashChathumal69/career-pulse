@@ -61,15 +61,33 @@ class _DashboadState extends State<Dashboad> {
               ),
             ),
 
-
-           
-
-           
-
             //search bar
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: SearchBarWidget(),
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.search, color: Colors.blueGrey),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Search",
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(color: Colors.blueGrey),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             SizedBox(height: 10),
             //Categories topic
@@ -85,7 +103,7 @@ class _DashboadState extends State<Dashboad> {
                   GestureDetector(
                     onTap: () {},
                     child: Text(
-                      "See all",
+                      "see all",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
@@ -148,6 +166,23 @@ class _DashboadState extends State<Dashboad> {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
                           "assets/mechanic.png",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Container(
+                      height: 130,
+                      width: 180,
+                      decoration: BoxDecoration(
+                        color: Colors.blue[300],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          "assets/electrician.png",
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -360,6 +395,7 @@ class _DashboadState extends State<Dashboad> {
                                           subject: 'Career Pulse App',
                                         );
                                       },
+
                                       child: Text('Invite friends'),
                                     ),
                                   ),
